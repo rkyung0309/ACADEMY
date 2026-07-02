@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 선생님 피드백방 - 똑소리 속기</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="assets/css/index.css?v=portal-20260505-clean">
+  <link rel="stylesheet" href="assets/css/responsive-sidebar.css?v=portal-20260505-clean">
+  <link rel="stylesheet" href="assets/css/learning-portal.css?v=portal-20260505-clean">
+  <link rel="stylesheet" href="assets/css/mypage-redesign.css?v=20260531-ai-premium">
+  <link rel="stylesheet" href="assets/css/ai-teacher-dashboard.css?v=20260531-section-focus-v2">
+
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v1">
+</head>
+<body class="study-tools-body" data-auth="approved" data-manual-boot="true" onload="window.SorizavaPortal.initAiTeacherPage()">
+  <div id="loading-overlay"><div class="spinner"></div></div>
+  <div id="app-wrapper" style="display:none;">
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar-overlay" onclick="toggleSidebar(false)"></div>
+    <nav class="sidebar" aria-label="주 메뉴">
+  <div class="sidebar-top">
+    <div class="logo">⚡ SHORTHAND</div>
+    <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="메뉴 닫기">×</button>
+  </div>
+  <div class="nav-list nav-groups">
+    <details class="nav-section" data-nav-section="my-learning" open>
+      <summary class="nav-section-title"><span>나의 학습</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="index.html" class="nav-item" data-nav-key="dashboard"><span class="nav-icon">📊</span><span class="nav-text">대시보드</span></a>
+        <a href="ai-teacher.html" class="nav-item ai-nav-highlight active" data-nav-key="ai-teacher"><span class="nav-icon">🤖</span><span class="nav-text">AI 선생님 피드백방</span></a>
+        <a href="mypage.html" class="nav-item" data-nav-key="mypage"><span class="nav-icon">👤</span><span class="nav-text">마이페이지</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="study-room">
+      <summary class="nav-section-title"><span>공부방</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="intermediate.html" class="nav-item" data-nav-key="intermediate"><span class="nav-icon">🧩</span><span class="nav-text">중급반 공부방</span></a>
+        <a href="intermediate.html?course=advanced" class="nav-item" data-nav-key="advanced"><span class="nav-icon">🚀</span><span class="nav-text">고급반 공부방</span></a>
+        <a href="intermediate.html?course=grade" class="nav-item" data-nav-key="grade"><span class="nav-icon">🏅</span><span class="nav-text">급수반 공부방</span></a>
+        <a href="editorial.html" class="nav-item" data-nav-key="editorial"><span class="nav-icon">📰</span><span class="nav-text">사설연습</span></a>
+        <a href="random.html" class="nav-item" data-nav-key="random"><span class="nav-icon">🎲</span><span class="nav-text">약어랜덤</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="promotion">
+      <summary class="nav-section-title"><span>승급·시험</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="unlock-room.html" class="nav-item" id="unlockRoomNavItem" data-nav-key="unlock-room"><span class="nav-icon">🎯</span><span class="nav-text" id="unlockRoomNavText">진도 승급실</span></a>
+        <a href="exam.html" class="nav-item" data-nav-key="exam"><span class="nav-icon">🎓</span><span class="nav-text">입문반 졸업시험</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="tools">
+      <summary class="nav-section-title"><span>학습도구</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="toksori2.html" class="nav-item" data-nav-key="toksori2"><span class="nav-icon">📝</span><span class="nav-text">똑소리2</span></a>
+        <a href="wrong-note.html" class="nav-item" data-nav-key="wrong-note"><span class="nav-icon">🧾</span><span class="nav-text">오답노트</span></a>
+        <a href="abbr-dictionary.html" class="nav-item" data-nav-key="abbr-dictionary"><span class="nav-icon">📚</span><span class="nav-text">약어사전</span></a>
+        <a href="measure.html" class="nav-item" data-nav-key="measure"><span class="nav-icon">⏱️</span><span class="nav-text">자수측정</span></a>
+        <a href="sparta.html" class="nav-item" data-nav-key="sparta"><span class="nav-icon">🔥</span><span class="nav-text">스파르타</span></a>
+        <a href="king.html" class="nav-item" data-nav-key="king"><span class="nav-icon">👑</span><span class="nav-text">타자왕</span></a>
+      </div>
+    </details>
+  </div>
+  <div class="sidebar-footer">
+    <div class="profile-card" onclick="window.SorizavaAuth && window.SorizavaAuth.signOut ? window.SorizavaAuth.signOut() : (window.logout && window.logout())">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-meta">
+        <div class="profile-name" id="userNameSide">User</div>
+        <div class="profile-action">로그아웃</div>
+      </div>
+    </div>
+    <button id="adminBtn" class="admin-trigger" onclick="location.href='admin.html'" style="display:none;">⚙️ 관리자 페이지</button>
+  </div>
+</nav>
+    <main class="main-content portal-main">
+<section class="portal-page ai-teacher-room-page" data-portal-page="ai-teacher">
+  <header class="ai-room-clean-header ai-focus-section" aria-label="AI 선생님 피드백방 소개">
+    <div class="ai-room-title-block">
+      <p class="portal-kicker">AI TEACHER FEEDBACK ROOM</p>
+      <h1>AI 선생님 피드백방</h1>
+      <p>오늘 연습 흐름과 최근 7일 변화를 모아 약점, 입력 지연, 반복 오자, 약어 사용을 분석합니다.</p>
+    </div>
+    <div class="ai-room-status-wrap" aria-label="AI 분석 현황">
+      <div class="dashboard-ai-status-grid" id="dashboardAiTeacherStats">
+        <div><span>오늘 기록</span><b>0회</b></div>
+        <div><span>최근 7일</span><b>0회</b></div>
+        <div><span>AI 분석</span><b>0건</b></div>
+      </div>
+    </div>
+  </header>
+
+  <section class="ai-room-workbench ai-focus-section" aria-label="AI 피드백 생성">
+    <article class="ai-room-create-card primary-create">
+      <div>
+        <p class="portal-label">TODAY FEEDBACK</p>
+        <h2>오늘 전체 분석</h2>
+        <p>오늘 저장된 기록을 묶어 공통 약점과 다음 과제를 정리합니다.</p>
+      </div>
+      <button type="button" class="portal-btn primary" id="dashboardDailyAiFeedbackBtn" data-ai-daily-feedback>오늘 전체 AI 피드백 받기</button>
+    </article>
+
+    <article class="ai-room-create-card">
+      <div>
+        <p class="portal-label">GROWTH REPORT</p>
+        <h2>최근 7일 성장 분석</h2>
+        <p>최근 기록을 이전 흐름과 비교해 상승·하락 포인트를 확인합니다.</p>
+      </div>
+      <button type="button" class="portal-btn secondary" id="dashboardGrowthAiFeedbackBtn" data-ai-growth-feedback>최근 7일 성장 분석 받기</button>
+    </article>
+  </section>
+
+
+  <section class="ai-room-learning-report ai-focus-section" aria-label="나의 학습 리포트">
+    <div class="ai-room-section-head">
+      <div>
+        <p class="portal-label">MY LEARNING DATA</p>
+        <h2>나의 학습 리포트</h2>
+        <p id="aiTeacherLearningDesc">저장된 학습 기록을 기준으로 오늘 상태와 최근 흐름을 함께 보여줍니다.</p>
+      </div>
+      <span class="portal-chip" id="aiTeacherLearningRange">최근 7일</span>
+    </div>
+
+    <div class="ai-learning-brief" id="aiTeacherLearningHeadline">학습 기록을 불러오는 중입니다.</div>
+
+    <div class="ai-learning-stat-grid" id="aiTeacherLearningStats" aria-label="학습 핵심 지표"></div>
+
+    <div class="ai-learning-chart-grid">
+      <article class="ai-learning-chart-card">
+        <div class="ai-chart-head">
+          <div><strong>최근 7일 학습량</strong><span>요일별 저장 기록 기준</span></div>
+        </div>
+        <div class="ai-week-chart" id="aiTeacherWeekBars"></div>
+      </article>
+
+      <article class="ai-learning-chart-card">
+        <div class="ai-chart-head">
+          <div><strong>정확도 흐름</strong><span>최근 정확도 기록 10개 기준</span></div>
+        </div>
+        <div class="ai-accuracy-chart" id="aiTeacherAccuracyTrend"></div>
+      </article>
+
+      <article class="ai-learning-chart-card ai-learning-error-card">
+        <div class="ai-chart-head">
+          <div><strong>오류 비중</strong><span>최근 기록 기준 오자·탈자·첨자</span></div>
+        </div>
+        <div class="ai-error-visual" id="aiTeacherErrorBars"></div>
+      </article>
+
+      <article class="ai-learning-chart-card ai-learning-prescription-card">
+        <div class="ai-chart-head">
+          <div><strong>AI가 우선 참고할 약점</strong><span>피드백 생성 시 함께 반영</span></div>
+        </div>
+        <div class="ai-learning-weakpoint" id="aiTeacherWeakPoint"></div>
+      </article>
+    </div>
+  </section>
+
+
+  <section class="ai-room-coaching-board ai-focus-section" aria-label="AI 코칭 보드">
+    <div class="ai-room-section-head ai-coaching-head">
+      <div>
+        <p class="portal-label">AI COACHING BOARD</p>
+        <h2>AI 코칭 보드</h2>
+        <p>점수·승급 가능성·약어 숙련도·이번 주 처방을 한 화면에 압축해 보여줍니다.</p>
+      </div>
+      <span class="portal-chip" id="aiTeacherCoachingStatus">자동 계산</span>
+    </div>
+    <div class="ai-coaching-score-strip" id="aiTeacherCoachingScores"></div>
+    <div class="ai-coaching-grid">
+      <article class="ai-coaching-card ai-coaching-prescription">
+        <div class="ai-chart-head">
+          <div><strong>이번 주 학습 처방전</strong><span>AI 피드백 생성 전에도 현재 기록 기준으로 자동 제안</span></div>
+        </div>
+        <div id="aiTeacherWeeklyPrescription"></div>
+      </article>
+      <article class="ai-coaching-card ai-coaching-actions">
+        <div class="ai-chart-head">
+          <div><strong>추천 액션</strong><span>분석 결과를 바로 학습으로 연결</span></div>
+        </div>
+        <div id="aiTeacherCoachingActions"></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="ai-room-mini-info ai-focus-section" aria-label="분석 항목">
+    <div class="dashboard-ai-status" id="dashboardAiTeacherStatus">AI 분석 상태를 불러오는 중입니다.</div>
+    <div class="ai-room-chip-row">
+      <span>입력 지연</span>
+      <span>반복 오자</span>
+      <span>탈자 구간</span>
+      <span>약어 사용</span>
+      <span>맞춤 과제</span>
+    </div>
+  </section>
+
+  <article class="portal-card ai-room-results-card ai-focus-section" id="ai-feedback-results">
+    <div class="ai-room-results-head archive-head">
+      <div>
+        <p class="portal-label">AI FEEDBACK ARCHIVE</p>
+        <h2>분석 보관함</h2>
+        <p class="ai-room-results-sub">최신 결과 1건만 펼쳐 보고, 이전 결과는 월별 보관함에서 필요할 때만 열어봅니다.</p>
+      </div>
+      <div class="ai-room-results-controls">
+        <span class="portal-chip" id="aiTeacherFeedbackCount">0건</span>
+        <label class="ai-feedback-filter-label" for="aiFeedbackTypeFilter">분석 유형</label>
+        <select id="aiFeedbackTypeFilter" class="ai-feedback-filter-select" aria-label="AI 분석 결과 유형 필터">
+          <option value="all">전체</option>
+          <option value="daily">일일 종합</option>
+          <option value="growth_7_days">성장 분석</option>
+          <option value="single_record">파일별</option>
+        </select>
+      </div>
+    </div>
+    <div id="aiTeacherFeedbackList" class="ai-room-result-list"></div>
+  </article>
+</section>
+    </main>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-client.js?v=portal-20260505-clean"></script>
+<script src="assets/js/auth.js?v=portal-20260505-clean"></script>
+<script src="assets/js/records.js?v=20260531-ai-premium"></script>
+<script src="assets/js/responsive-sidebar.js?v=portal-20260505-clean"></script>
+<script src="assets/js/learning-portal.js?v=20260601-unlock-chances"></script>
+
+  <script src="assets/js/mobile-keyboard-blocker.js?v=20260601-external-keyboard-safe"></script>
+</body>
+</html>

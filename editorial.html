@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHORTHAND PRO - 사설치기</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="assets/css/editorial.css?v=20260611-editorial-equal-ui">
+    <link rel="stylesheet" href="assets/css/responsive-sidebar.css?v=shell-20260501-study-timer">
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v1">
+</head>
+<body data-manual-boot="true" onload="window.SorizavaAuth.bootPage(initApp)" data-auth="approved">
+
+    <div id="loading-overlay"><div class="spinner"></div></div>
+
+    <div id="login-wrapper">
+        <div class="login-art">
+            <h2 style="color:white; font-size:2.5rem; font-weight:900; text-shadow:0 10px 20px rgba(0,0,0,0.1);">Speed Typer.</h2>
+        </div>
+        <div class="login-form-container">
+            <div style="font-size:2.5rem; font-weight:900; margin-bottom:10px;">Hello,<br>Master!</div>
+            <p style="color:#636E72; margin-bottom:40px;">로그인하여 연습을 시작하세요.</p>
+            <input type="text" id="nameInput" class="inp-box" placeholder="이름 (Name)">
+            <input type="password" id="pwInput" class="inp-box" placeholder="비밀번호 (Password)" onkeypress="if(event.keyCode==13) login()">
+            <button onclick="login()" class="btn-login">Login 🚀</button>
+        </div>
+    </div>
+
+    <div id="app-wrapper">
+        <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+        <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+        <nav class="sidebar" aria-label="주 메뉴">
+  <div class="sidebar-top">
+    <div class="logo">⚡ SHORTHAND</div>
+    <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="메뉴 닫기">×</button>
+  </div>
+  <div class="nav-list nav-groups">
+    <details class="nav-section" data-nav-section="my-learning">
+      <summary class="nav-section-title"><span>나의 학습</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="index.html" class="nav-item" data-nav-key="dashboard"><span class="nav-icon">📊</span><span class="nav-text">대시보드</span></a>
+        <a href="ai-teacher.html" class="nav-item ai-nav-highlight" data-nav-key="ai-teacher"><span class="nav-icon">🤖</span><span class="nav-text">AI 선생님 피드백방</span></a>
+        <a href="mypage.html" class="nav-item" data-nav-key="mypage"><span class="nav-icon">👤</span><span class="nav-text">마이페이지</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="study-room" open>
+      <summary class="nav-section-title"><span>공부방</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="intermediate.html" class="nav-item" data-nav-key="intermediate"><span class="nav-icon">🧩</span><span class="nav-text">중급반 공부방</span></a>
+        <a href="intermediate.html?course=advanced" class="nav-item" data-nav-key="advanced"><span class="nav-icon">🚀</span><span class="nav-text">고급반 공부방</span></a>
+        <a href="intermediate.html?course=grade" class="nav-item" data-nav-key="grade"><span class="nav-icon">🏅</span><span class="nav-text">급수반 공부방</span></a>
+        <a href="editorial.html" class="nav-item active" data-nav-key="editorial"><span class="nav-icon">📰</span><span class="nav-text">사설연습</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="promotion">
+      <summary class="nav-section-title"><span>승급·시험</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="unlock-room.html" class="nav-item" id="unlockRoomNavItem" data-nav-key="unlock-room"><span class="nav-icon">🎯</span><span class="nav-text" id="unlockRoomNavText">진도 승급실</span></a>
+        <a href="exam.html" class="nav-item" data-nav-key="exam"><span class="nav-icon">🎓</span><span class="nav-text">입문반 졸업시험</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="tools">
+      <summary class="nav-section-title"><span>학습도구</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="toksori2.html" class="nav-item" data-nav-key="toksori2"><span class="nav-icon">📝</span><span class="nav-text">똑소리2</span></a>
+        <a href="wrong-note.html" class="nav-item" data-nav-key="wrong-note"><span class="nav-icon">🧾</span><span class="nav-text">오답노트</span></a>
+        <a href="abbr-dictionary.html" class="nav-item" data-nav-key="abbr-dictionary"><span class="nav-icon">📚</span><span class="nav-text">약어사전</span></a>
+        <a href="measure.html" class="nav-item" data-nav-key="measure"><span class="nav-icon">⏱️</span><span class="nav-text">자수측정</span></a>
+        <a href="sparta.html" class="nav-item" data-nav-key="sparta"><span class="nav-icon">🔥</span><span class="nav-text">스파르타</span></a>
+        <a href="king.html" class="nav-item" data-nav-key="king"><span class="nav-icon">👑</span><span class="nav-text">타자왕</span></a>
+      </div>
+    </details>
+  </div>
+  <div class="sidebar-footer">
+    <div class="profile-card" onclick="window.SorizavaAuth && window.SorizavaAuth.signOut ? window.SorizavaAuth.signOut() : (window.logout && window.logout())">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-meta">
+        <div class="profile-name" id="userNameSide">User</div>
+        <div class="profile-action">로그아웃</div>
+      </div>
+    </div>
+    <button id="adminBtn" class="admin-trigger" onclick="location.href='admin.html'" style="display:none;">⚙️ 관리자 페이지</button>
+  </div>
+</nav>
+
+        <main class="main-content">
+            <section class="practice-header editorial-hero" aria-label="사설치기 상단 영역">
+                <div class="page-title-wrap">
+                    <div class="page-title-icon" aria-hidden="true">📰</div>
+                    <div class="page-title">
+                        <h2>사설 치기 연습</h2>
+                        <p>네이버 사설을 복사하여 연습하고 정확도를 확인해보세요.</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <a href="https://news.naver.com/opinion/home" target="_blank" class="naver-banner" rel="noopener">
+                        <span class="naver-mark">N</span>
+                        <span>사설 가져오기</span>
+                        <span class="naver-arrow">⌄</span>
+                    </a>
+                    <div class="status-display" aria-label="연습 현황">
+                        <div class="status-cell">
+                            <span class="status-icon">⏱</span>
+                            <span class="status-text">
+                                <strong id="timer" class="timer-val">00:00</strong>
+                                <em>시간</em>
+                            </span>
+                        </div>
+                        <div class="status-divider" aria-hidden="true"></div>
+                        <div class="status-cell">
+                            <span class="status-icon rocket">🚀</span>
+                            <span class="status-text">
+                                <strong id="speedDisplay" class="speed-val">0</strong>
+                                <em>자/분</em>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="editorial-guide" aria-label="사설치기 사용방법">
+                <div class="guide-icon" aria-hidden="true">i</div>
+                <div class="guide-copy">
+                    <p><strong>사용 방법</strong></p>
+                    <p>사설 가져오기 → 원문 붙여넣기 → 텍스트 정제(선택) → 연습 입력창에 그대로 따라치기</p>
+                    <p>듣고치기는 <b>읽기</b> 버튼을 누르고, 속도는 바를 왼쪽으로 옮기면 느리게 · 오른쪽으로 옮기면 빠르게 조절됩니다.</p>
+                </div>
+            </section>
+
+            <div class="practice-container equal-editor-grid">
+                <section class="editor-card source-card" aria-label="원문 입력 카드">
+                    <div class="card-top">
+                        <span class="card-title"><span class="title-icon">▣</span> 원문 입력</span>
+                        <span class="count-badge" id="sourceCount">0자</span>
+                    </div>
+                    <div class="toolbar source-toolbar">
+                        <button class="btn btn-clean" onclick="cleanSourceText()">✨ 텍스트 정제</button>
+                        <div class="tts-group">
+                            <select id="voiceSelect" aria-label="읽기 음성 선택"></select>
+                            <span class="tts-rate-label">속도</span>
+                            <span class="info-dot" tabindex="0" role="button" aria-label="읽기 속도 조절 설명" data-tooltip="왼쪽으로 옮기면 느려지고, 오른쪽으로 옮기면 빨라집니다.">i</span>
+                            <input type="range" id="ttsRate" min="0.5" max="2.0" step="0.1" value="1.0" title="읽기 속도 조절" aria-label="읽기 속도 조절">
+                            <button class="btn btn-tts" onclick="toggleTTS()" id="btnTTS" title="원문 읽기 시작 또는 정지">🔊 읽기</button>
+                        </div>
+                    </div>
+                    <div class="textarea-frame">
+                        <textarea id="sourceArea" placeholder="위 '사설 가져오기' 버튼을 눌러 내용을 복사한 뒤 붙여넣으세요!" oninput="updateSourceCount()"></textarea>
+                        <span class="textarea-counter" id="sourceLimitCount">0 / 100,000</span>
+                    </div>
+                </section>
+
+                <section class="editor-card typing-card" aria-label="연습 입력 카드">
+                    <div class="card-top">
+                        <span class="card-title"><span class="title-icon">✎</span> 연습 입력창</span>
+                        <span class="count-badge" id="typingCount">0자</span>
+                    </div>
+                    <div class="toolbar typing-toolbar">
+                        <span class="tip-label">Tip: <b>ESC</b>로 채점</span>
+                        <div class="typing-actions">
+                            <button class="btn btn-reset" onclick="resetPractice()">↻ 초기화</button>
+                            <button class="btn btn-grade" onclick="calculateAccuracy()">◎ 정확도 확인</button>
+                        </div>
+                    </div>
+                    <div class="textarea-frame">
+                        <textarea id="typingArea" placeholder="여기를 클릭하고 타이핑을 시작하세요." oninput="handleTyping()"></textarea>
+                        <span class="textarea-counter" id="typingLimitCount">0 / 100,000</span>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div id="resultModal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('resultModal').style.display='none'">&times;</span>
+            <h3 style="text-align:center; margin-top:0; color:var(--text-dark);">📊 채점 결과</h3>
+            
+            <div class="score-circle">
+                <div class="score-number" id="finalScore">0%</div>
+                <div class="score-label">정확도</div>
+            </div>
+            
+            <div class="score-detail" id="scoreDetail"></div>
+
+            <h4 style="margin-bottom:10px; color:var(--text-dark);">상세 비교 (오답 노트)</h4>
+            <div class="diff-view" id="diffOutput"></div>
+            
+            <div style="text-align:center; margin-top:30px;">
+                <button class="btn btn-grade" onclick="document.getElementById('resultModal').style.display='none'">닫기 (ESC)</button>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/records.js?v=20260601-fixes"></script>
+<script src="assets/js/editorial.js"></script>
+<script src="assets/js/responsive-sidebar.js?v=shell-20260501-study-timer"></script>
+  <script src="assets/js/mobile-keyboard-blocker.js?v=20260601-external-keyboard-safe"></script>
+</body>
+
+</html>
+

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SHORTHAND PRO - 내가 바로 속기왕 (Enhanced)</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/css/king.css?v=20260601-fixes2">
+    <link rel="stylesheet" href="assets/css/responsive-sidebar.css?v=shell-20260501-study-timer">
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v1">
+  <link rel="stylesheet" href="assets/css/sorizava-ui-refresh.css?v=20260611-ui-only">
+</head>
+<body data-auth="approved">
+
+<button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<div class="modal-overlay" id="overlay" onclick="closeAllModals()"></div>
+
+<div id="rank-modal" class="modal-box">
+    <h3 style="margin-top:0; color:var(--text-dark);">📊 오늘의 순위</h3>
+    <div id="rank-list" style="max-height: 300px; overflow-y: auto; text-align:left; margin-bottom:20px; border:1px solid var(--bg-body); border-radius:12px;"></div>
+    <button class="btn" style="background:var(--bg-body); color:var(--text-grey); width:100%;" onclick="closeAllModals()">닫기</button>
+</div>
+
+<div id="result-modal" class="modal-box">
+    <h2 style="color:var(--primary); margin-top:0;">Game Over! 🎉</h2>
+    
+    <div style="font-size: 1.1rem; margin: 20px 0; background:var(--sidebar-bg); padding:20px; border-radius:16px;">
+        <p style="margin:0; color:var(--text-grey); font-size:0.9rem;">최종 속도</p>
+        <p style="font-size: 3rem; font-weight: 900; color: var(--text-dark); margin:5px 0;">
+            <span id="final-cpm-res">0</span><span style="font-size:1.2rem; font-weight:normal;">자</span>
+        </p>
+        <div id="tier-badge" class="tier-badge" style="background:#aaa;">Unranked</div>
+    </div>
+
+    <div style="width: 100%; height: 200px; margin-bottom: 20px;">
+        <canvas id="resultChart"></canvas>
+    </div>
+
+    <button class="btn" style="background:var(--primary); color:white; width:100%;" onclick="closeAllModals()">기록 저장 및 닫기</button>
+</div>
+
+<nav class="sidebar" aria-label="주 메뉴">
+  <div class="sidebar-top">
+    <div class="logo">⚡ SHORTHAND</div>
+    <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="메뉴 닫기">×</button>
+  </div>
+  <div class="nav-list nav-groups">
+    <details class="nav-section" data-nav-section="my-learning">
+      <summary class="nav-section-title"><span>나의 학습</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="index.html" class="nav-item" data-nav-key="dashboard"><span class="nav-icon">📊</span><span class="nav-text">대시보드</span></a>
+        <a href="ai-teacher.html" class="nav-item ai-nav-highlight" data-nav-key="ai-teacher"><span class="nav-icon">🤖</span><span class="nav-text">AI 선생님 피드백방</span></a>
+        <a href="mypage.html" class="nav-item" data-nav-key="mypage"><span class="nav-icon">👤</span><span class="nav-text">마이페이지</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="study-room">
+      <summary class="nav-section-title"><span>공부방</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="intermediate.html" class="nav-item" data-nav-key="intermediate"><span class="nav-icon">🧩</span><span class="nav-text">중급반 공부방</span></a>
+        <a href="intermediate.html?course=advanced" class="nav-item" data-nav-key="advanced"><span class="nav-icon">🚀</span><span class="nav-text">고급반 공부방</span></a>
+        <a href="intermediate.html?course=grade" class="nav-item" data-nav-key="grade"><span class="nav-icon">🏅</span><span class="nav-text">급수반 공부방</span></a>
+        <a href="editorial.html" class="nav-item" data-nav-key="editorial"><span class="nav-icon">📰</span><span class="nav-text">사설연습</span></a>
+        <a href="random.html" class="nav-item" data-nav-key="random"><span class="nav-icon">🎲</span><span class="nav-text">약어랜덤</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="promotion">
+      <summary class="nav-section-title"><span>승급·시험</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="unlock-room.html" class="nav-item" id="unlockRoomNavItem" data-nav-key="unlock-room"><span class="nav-icon">🎯</span><span class="nav-text" id="unlockRoomNavText">진도 승급실</span></a>
+        <a href="exam.html" class="nav-item" data-nav-key="exam"><span class="nav-icon">🎓</span><span class="nav-text">입문반 졸업시험</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="tools" open>
+      <summary class="nav-section-title"><span>학습도구</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="toksori2.html" class="nav-item" data-nav-key="toksori2"><span class="nav-icon">📝</span><span class="nav-text">똑소리2</span></a>
+        <a href="wrong-note.html" class="nav-item" data-nav-key="wrong-note"><span class="nav-icon">🧾</span><span class="nav-text">오답노트</span></a>
+        <a href="abbr-dictionary.html" class="nav-item" data-nav-key="abbr-dictionary"><span class="nav-icon">📚</span><span class="nav-text">약어사전</span></a>
+        <a href="measure.html" class="nav-item" data-nav-key="measure"><span class="nav-icon">⏱️</span><span class="nav-text">자수측정</span></a>
+        <a href="sparta.html" class="nav-item" data-nav-key="sparta"><span class="nav-icon">🔥</span><span class="nav-text">스파르타</span></a>
+        <a href="king.html" class="nav-item active" data-nav-key="king"><span class="nav-icon">👑</span><span class="nav-text">타자왕</span></a>
+      </div>
+    </details>
+  </div>
+  <div class="sidebar-footer">
+    <div class="profile-card" onclick="window.SorizavaAuth && window.SorizavaAuth.signOut ? window.SorizavaAuth.signOut() : (window.logout && window.logout())">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-meta">
+        <div class="profile-name" id="userNameSide">User</div>
+        <div class="profile-action">로그아웃</div>
+      </div>
+    </div>
+    <button id="adminBtn" class="admin-trigger" onclick="location.href='admin.html'" style="display:none;">⚙️ 관리자 페이지</button>
+  </div>
+</nav>
+
+<main class="main-content">
+    
+    <div class="page-header">
+        <div class="page-title">
+            <h2>👑 타자왕 (Typing King)</h2>
+            <p>오늘의 랭킹 1위에 응시하세요!</p>
+        </div>
+        <div style="display:flex; gap:10px;">
+             <label id="admin-upload-btn" class="btn-ghost" style="display:none; padding:8px 15px; border-radius:8px; border:2px solid var(--primary); color:var(--primary); cursor:pointer;">
+                ✍️ 글 등록 <input type="file" id="file-selector" style="display:none">
+            </label>
+            <button onclick="logout()" style="background:var(--white); border:2px solid var(--fail); color:var(--fail); padding:8px 15px; border-radius:8px; cursor:pointer; font-weight:bold;">로그아웃</button>
+        </div>
+    </div>
+
+    <div class="podium-card">
+        <div class="podium-item p-2">
+            <div class="crown-icon">🥈</div>
+            <div class="rank-label">2등</div>
+            <span id="p2-name" class="rank-name">-</span>
+            <span id="p2-cpm" class="rank-score">0자</span>
+        </div>
+        <div class="podium-item p-1">
+            <div class="crown-icon">👑</div>
+            <div class="rank-label">1등</div>
+            <span id="p1-name" class="rank-name">Loading..</span>
+            <span id="p1-cpm" class="rank-score">0자</span>
+        </div>
+        <div class="podium-item p-3">
+            <div class="crown-icon">🥉</div>
+            <div class="rank-label">3등</div>
+            <span id="p3-name" class="rank-name">-</span>
+            <span id="p3-cpm" class="rank-score">0자</span>
+        </div>
+    </div>
+
+    <div class="card-box">
+        
+        <div class="game-info-bar">
+            <div class="info-item" style="flex:1; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;">
+                <span style="background:#EEEBFF; color:var(--primary); padding:4px 8px; border-radius:6px; font-size:0.8rem;">지문</span>
+                <span id="file-name-display">-</span>
+            </div>
+            <div style="display:flex; gap:20px;">
+                <div class="info-item">🔥 <span id="combo-display" style="color:var(--fail);">0 Combo</span></div>
+                <div class="info-item">⏱ <span id="timer" style="color:var(--primary);">0초</span></div>
+                <div class="info-item">🚀 <span id="current-cpm" style="color:var(--primary); font-size:1.2rem;">0</span> 자</div>
+            </div>
+        </div>
+
+        <div class="settings-row">
+            <div style="display:flex; align-items:center; gap:10px; flex:1; min-width:250px;">
+                <span>📏 한 번에 볼 글자</span>
+                <input type="range" id="chunk-slider" min="10" max="50" value="30" oninput="updateChunkSize(this.value)">
+                <span id="chunk-val" style="background:var(--bg-body); padding:5px 10px; border-radius:8px;">30자</span>
+            </div>
+            
+            <label class="toggle-switch" title="타건음 켜기/끄기">
+                <input type="checkbox" class="toggle-input" id="sound-toggle" checked onchange="toggleSound(this.checked)">
+                <div class="toggle-bg"><div class="toggle-circle"></div></div>
+                <span>🔊 소리</span>
+            </label>
+
+            <label class="toggle-switch" title="다크 모드">
+                <input type="checkbox" class="toggle-input" id="dark-mode-toggle" onchange="toggleDarkMode(this.checked)">
+                <div class="toggle-bg"><div class="toggle-circle"></div></div>
+                <span>🌙 다크</span>
+            </label>
+        </div>
+
+        <div style="position:relative;">
+            <div id="target-box" class="target-box">준비 중...</div>
+            <div id="combo-effect-container" style="position:absolute; top:0; left:50%;"></div>
+        </div>
+        
+        <div id="input-wrapper"></div>
+
+        <div class="btn-group">
+            <button class="btn btn-reset" onclick="resetGame()">🔄 처음부터 다시</button>
+            <button class="btn btn-rank" onclick="toggleRank()">🏆 전체 순위 보기</button>
+        </div>
+    </div>
+
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/records.js?v=20260601-fixes"></script>
+<script src="assets/js/king.js?v=20260601-external-keyboard-safe"></script>
+<script src="assets/js/responsive-sidebar.js?v=shell-20260501-study-timer"></script>
+  <script src="assets/js/mobile-keyboard-blocker.js?v=20260601-external-keyboard-safe"></script>
+</body>
+</html>
+
+

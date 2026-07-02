@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHORTHAND PRO - 진도 승급실</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="assets/css/responsive-sidebar.css?v=promotion-subjects-20260531-v1">
+  <link rel="stylesheet" href="assets/css/unlock-room.css?v=20260601-fixes">
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v1">
+</head>
+<body data-auth="approved" data-manual-boot="true">
+  <div id="loading-overlay"><div class="spinner"></div></div>
+  <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" onclick="toggleSidebar(false)"></div>
+
+  <div id="app-wrapper">
+    <nav class="sidebar" aria-label="주 메뉴">
+  <div class="sidebar-top">
+    <div class="logo">⚡ SHORTHAND</div>
+    <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="메뉴 닫기">×</button>
+  </div>
+  <div class="nav-list nav-groups">
+    <details class="nav-section" data-nav-section="my-learning">
+      <summary class="nav-section-title"><span>나의 학습</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="index.html" class="nav-item" data-nav-key="dashboard"><span class="nav-icon">📊</span><span class="nav-text">대시보드</span></a>
+        <a href="ai-teacher.html" class="nav-item ai-nav-highlight" data-nav-key="ai-teacher"><span class="nav-icon">🤖</span><span class="nav-text">AI 선생님 피드백방</span></a>
+        <a href="mypage.html" class="nav-item" data-nav-key="mypage"><span class="nav-icon">👤</span><span class="nav-text">마이페이지</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="study-room">
+      <summary class="nav-section-title"><span>공부방</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="intermediate.html" class="nav-item" data-nav-key="intermediate"><span class="nav-icon">🧩</span><span class="nav-text">중급반 공부방</span></a>
+        <a href="intermediate.html?course=advanced" class="nav-item" data-nav-key="advanced"><span class="nav-icon">🚀</span><span class="nav-text">고급반 공부방</span></a>
+        <a href="intermediate.html?course=grade" class="nav-item" data-nav-key="grade"><span class="nav-icon">🏅</span><span class="nav-text">급수반 공부방</span></a>
+        <a href="editorial.html" class="nav-item" data-nav-key="editorial"><span class="nav-icon">📰</span><span class="nav-text">사설연습</span></a>
+        <a href="random.html" class="nav-item" data-nav-key="random"><span class="nav-icon">🎲</span><span class="nav-text">약어랜덤</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="promotion" open>
+      <summary class="nav-section-title"><span>승급·시험</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="unlock-room.html" class="nav-item active" id="unlockRoomNavItem" data-nav-key="unlock-room"><span class="nav-icon">🎯</span><span class="nav-text" id="unlockRoomNavText">진도 승급실</span></a>
+        <a href="exam.html" class="nav-item" data-nav-key="exam"><span class="nav-icon">🎓</span><span class="nav-text">입문반 졸업시험</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="tools">
+      <summary class="nav-section-title"><span>학습도구</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="toksori2.html" class="nav-item" data-nav-key="toksori2"><span class="nav-icon">📝</span><span class="nav-text">똑소리2</span></a>
+        <a href="wrong-note.html" class="nav-item" data-nav-key="wrong-note"><span class="nav-icon">🧾</span><span class="nav-text">오답노트</span></a>
+        <a href="abbr-dictionary.html" class="nav-item" data-nav-key="abbr-dictionary"><span class="nav-icon">📚</span><span class="nav-text">약어사전</span></a>
+        <a href="measure.html" class="nav-item" data-nav-key="measure"><span class="nav-icon">⏱️</span><span class="nav-text">자수측정</span></a>
+        <a href="sparta.html" class="nav-item" data-nav-key="sparta"><span class="nav-icon">🔥</span><span class="nav-text">스파르타</span></a>
+        <a href="king.html" class="nav-item" data-nav-key="king"><span class="nav-icon">👑</span><span class="nav-text">타자왕</span></a>
+      </div>
+    </details>
+  </div>
+  <div class="sidebar-footer">
+    <div class="profile-card" onclick="window.SorizavaAuth && window.SorizavaAuth.signOut ? window.SorizavaAuth.signOut() : (window.logout && window.logout())">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-meta">
+        <div class="profile-name" id="userNameSide">User</div>
+        <div class="profile-action">로그아웃</div>
+      </div>
+    </div>
+    <button id="adminBtn" class="admin-trigger" onclick="location.href='admin.html'" style="display:none;">⚙️ 관리자 페이지</button>
+  </div>
+</nav>
+
+    <main class="unlock-main">
+      <section class="unlock-page">
+        <header class="unlock-header">
+          <div>
+            <p class="unlock-kicker">PROMOTION TEST ROOM</p>
+            <h1 id="unlockPageTitle">🎯 진도 승급실</h1>
+            <p id="unlockPageSubtitle">학생별 승급 기준에 따라 현재 응시해야 할 단계만 자동 배정됩니다.</p>
+          </div>
+          <div class="unlock-header-actions">
+            <button type="button" class="btn-subtle" id="adminUnlockPanelToggle" style="display:none;" onclick="toggleUnlockAdminPanel()">자료 등록/수정</button>
+          </div>
+        </header>
+
+        <section class="unlock-status-grid" aria-label="진도 승급실 상태">
+          <article class="unlock-status-card primary">
+            <span>승급 대상 단계</span>
+            <b id="unlockTargetLabel">확인 중</b>
+            <small id="unlockTargetMeta">학생별 승급 기준에 따라 자동 선택됩니다.</small>
+          </article>
+          <article class="unlock-status-card">
+            <span>통과 후 단계</span>
+            <b id="unlockNextLabel">확인 중</b>
+            <small id="unlockNextMeta">통과 시 열릴 다음 단계를 표시합니다.</small>
+          </article>
+          <article class="unlock-status-card">
+            <span>이번 주 남은 응시</span>
+            <b id="unlockRemainCount">0회</b>
+            <small id="unlockAttemptMeta">주 3회 무료 응시</small>
+          </article>
+          <article class="unlock-status-card">
+            <span>추가 응시권</span>
+            <b id="unlockCreditCount">0회</b>
+            <small>관리자가 수동으로 추가한 승급 도전 횟수</small>
+          </article>
+        </section>
+
+        <section class="unlock-admin-card" id="unlockAdminPanel" style="display:none;">
+          <div class="unlock-admin-head">
+            <div>
+              <strong>진도 승급실 듣고치기 자료 관리</strong>
+              <p>진도 승급실 전용 원문과 오디오를 등록합니다. 학생 화면에는 지정된 승급 대상 1개만 표시됩니다.</p>
+            </div>
+            <button type="button" class="btn-subtle" onclick="toggleUnlockAdminPanel(false)">닫기</button>
+          </div>
+          <div class="unlock-course-tabs" id="unlockCourseTabs"></div>
+          <div class="unlock-admin-grid">
+            <label class="unlock-field"><span>단계</span><select id="unlockAdminLevel"></select></label>
+            <label class="unlock-field"><span>자료 선택</span><select id="unlockAdminMaterialSelect"></select></label>
+            <label class="unlock-field wide"><span>자료명</span><input id="unlockAdminTitle" placeholder="예: 150자 승급 1번"></label>
+          </div>
+          <div class="unlock-subject-admin-grid">
+            <section class="unlock-subject-admin-card">
+              <div class="unlock-subject-title"><b>1과목 연설</b><span>먼저 재생됩니다.</span></div>
+              <label class="unlock-field"><span>연설 채점 기준 원문</span><textarea id="unlockAdminSourceText" placeholder="연설 듣고치기 채점 기준 원문을 입력하세요."></textarea></label>
+              <div class="unlock-admin-files">
+                <label class="file-button" for="unlockAdminSourceFile">연설 원문 TXT</label>
+                <input type="file" id="unlockAdminSourceFile" accept=".txt,text/plain">
+                <label class="file-button" for="unlockAdminAudioFile">연설 오디오</label>
+                <input type="file" id="unlockAdminAudioFile" accept="audio/*">
+                <span id="unlockAdminAudioName">연설 오디오 없음</span>
+              </div>
+            </section>
+            <section class="unlock-subject-admin-card">
+              <div class="unlock-subject-title"><b>2과목 논설</b><span>연설 종료 후 1분 뒤 이어서 재생됩니다.</span></div>
+              <label class="unlock-field"><span>논설 채점 기준 원문</span><textarea id="unlockAdminEditorialSourceText" placeholder="논설 듣고치기 채점 기준 원문을 입력하세요."></textarea></label>
+              <div class="unlock-admin-files">
+                <label class="file-button" for="unlockAdminEditorialSourceFile">논설 원문 TXT</label>
+                <input type="file" id="unlockAdminEditorialSourceFile" accept=".txt,text/plain">
+                <label class="file-button" for="unlockAdminEditorialAudioFile">논설 오디오</label>
+                <input type="file" id="unlockAdminEditorialAudioFile" accept="audio/*">
+                <span id="unlockAdminEditorialAudioName">논설 오디오 없음</span>
+              </div>
+            </section>
+          </div>
+          <div class="unlock-admin-actions">
+            <button type="button" class="btn-subtle" onclick="newUnlockMaterialForm()">새 자료</button>
+            <button type="button" class="btn-primary" onclick="saveUnlockMaterial()">저장/수정</button>
+            <button type="button" class="btn-danger" onclick="deleteUnlockMaterial()">삭제</button>
+          </div>
+        </section>
+
+        <section class="unlock-test-card" id="unlockTestCard">
+          <div class="unlock-test-ready" id="unlockReadyPanel">
+            <div class="unlock-lock-icon">🔒</div>
+            <div>
+              <h2 id="unlockReadyTitle">응시 준비 중</h2>
+              <p id="unlockReadyMessage">관리자가 등록한 승급 평가 파일 중 겹치지 않는 파일이 자동 배정됩니다.</p>
+            </div>
+            <button type="button" class="btn-primary btn-start" id="unlockStartBtn" onclick="startUnlockChallenge()">응시 시작</button>
+          </div>
+
+          <div class="unlock-live-panel" id="unlockLivePanel" style="display:none;">
+            <div class="unlock-live-top">
+              <div>
+                <span class="live-badge">진행 중</span>
+                <h2 id="unlockLiveTitle">승급 평가</h2>
+                <p>일시정지, 되감기, 속도 조절 없이 한 번에 진행됩니다.</p>
+              </div>
+              <div class="unlock-timer" id="unlockTimer">00:00</div>
+            </div>
+            <div class="unlock-subject-work" id="unlockSubjectWorkPanel">
+              <div class="unlock-audio-display">
+                <div class="audio-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+                <div>
+                  <strong id="unlockAudioState">오디오 재생 대기</strong>
+                  <small id="unlockAudioMeta">응시 시작 후 자동 재생됩니다.</small>
+                </div>
+                <div class="unlock-audio-time"><span id="unlockCurrentTime">0:00</span> / <span id="unlockTotalTime">0:00</span></div>
+              </div>
+              <div class="unlock-progress"><i id="unlockAudioProgress" style="width:0%"></i></div>
+              <textarea id="unlockTypingArea" spellcheck="false" wrap="soft" placeholder="오디오가 시작되면 이 칸에 바로 입력하세요."></textarea>
+              <div class="unlock-submit-row">
+                <span id="unlockTypingCount">0자 입력</span>
+                <button type="button" class="btn-primary" id="unlockSubmitBtn" onclick="finishUnlockChallenge()">연설 입력 완료</button>
+              </div>
+            </div>
+            <div class="unlock-break-panel" id="unlockBreakPanel" style="display:none;">
+              <div class="unlock-break-icon">⏳</div>
+              <div>
+                <h3>연설 입력이 완료되었습니다.</h3>
+                <p>논설은 <b id="unlockBreakTimer">01:00</b> 후 자동으로 시작됩니다. 준비가 끝났다면 바로 시작할 수 있습니다.</p>
+              </div>
+              <button type="button" class="btn-primary" id="unlockNextSubjectBtn" onclick="startNextSubjectNow()">논설 바로 시작</button>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div id="unlockResultModal" class="unlock-modal" onclick="closeUnlockResult(event)">
+    <div class="unlock-modal-box">
+      <button type="button" class="modal-close" onclick="closeUnlockResult()">×</button>
+      <div class="unlock-result-mark" id="unlockResultMark">🎯</div>
+      <h2 id="unlockResultTitle">승급 결과</h2>
+      <span class="unlock-result-label">최종 정확도</span>
+      <div class="unlock-result-score" id="unlockResultScore">0%</div>
+      <div class="unlock-result-details" aria-label="채점 요약">
+        <span>오자 <b id="unlockResultWrong">0개</b></span>
+        <span>탈자 <b id="unlockResultMissing">0개</b></span>
+        <span>첨자 <b id="unlockResultAdded">0개</b></span>
+      </div>
+      <p id="unlockResultMessage">결과를 확인하는 중입니다.</p>
+      <button type="button" class="btn-primary" onclick="closeUnlockResult()">확인</button>
+    </div>
+  </div>
+
+  <audio id="unlockAudioPlayer" preload="metadata"></audio>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-client.js?v=promotion-subjects-20260531-v1"></script>
+  <script src="assets/js/auth.js?v=promotion-subjects-20260531-v1"></script>
+  <script src="assets/js/records.js?v=20260601-fixes"></script>
+  <script src="assets/js/responsive-sidebar.js?v=promotion-subjects-20260531-v1"></script>
+  <script src="assets/js/unlock-room.js?v=20260601-score-normalize"></script>
+  <script src="assets/js/mobile-keyboard-blocker.js?v=20260601-external-keyboard-safe"></script>
+</body>
+</html>

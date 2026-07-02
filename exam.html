@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SHORTHAND PRO - 입문반 졸업시험</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="assets/css/exam.css?v=sidebar-abbr-20260430">
+    <link rel="stylesheet" href="assets/css/responsive-sidebar.css?v=shell-20260501-study-timer">
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v2">
+  <link rel="stylesheet" href="assets/css/exam-clean-card.css?v=20260612-v18">
+</head>
+<body data-auth="approved">
+
+<div id="quiz-overlay">
+    <div id="quiz-card-box">
+        <h3 style="color:var(--primary); margin-top:0; font-weight:900; letter-spacing:-0.5px;">💊 약어 퀴즈 (<span id="quiz-count">1/10</span>)</h3>
+        <p style="color:#888; font-size:0.9rem; margin-bottom:20px;">아래 문장의 '약어'를 정확하게 입력하세요.</p>
+        
+        <p id="quiz-sentence"></p>
+        
+        <input type="text" id="quiz-input" placeholder="정답 입력" autocomplete="off" style="border-color:var(--primary);">
+        
+        <div id="quiz-feedback">
+            <div id="status-text" class="status-msg"></div>
+            <div class="diff-text" id="user-diff-display" style="font-size:1.1rem; margin-bottom:5px;"></div>
+            <div class="correct-info" id="quiz-correct-ans"></div>
+        </div>
+    </div>
+</div>
+
+<button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<nav class="sidebar" aria-label="주 메뉴">
+  <div class="sidebar-top">
+    <div class="logo">⚡ SHORTHAND</div>
+    <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="메뉴 닫기">×</button>
+  </div>
+  <div class="nav-list nav-groups">
+    <details class="nav-section" data-nav-section="my-learning">
+      <summary class="nav-section-title"><span>나의 학습</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="index.html" class="nav-item" data-nav-key="dashboard"><span class="nav-icon">📊</span><span class="nav-text">대시보드</span></a>
+        <a href="ai-teacher.html" class="nav-item ai-nav-highlight" data-nav-key="ai-teacher"><span class="nav-icon">🤖</span><span class="nav-text">AI 선생님 피드백방</span></a>
+        <a href="mypage.html" class="nav-item" data-nav-key="mypage"><span class="nav-icon">👤</span><span class="nav-text">마이페이지</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="study-room">
+      <summary class="nav-section-title"><span>공부방</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="intermediate.html" class="nav-item" data-nav-key="intermediate"><span class="nav-icon">🧩</span><span class="nav-text">중급반 공부방</span></a>
+        <a href="intermediate.html?course=advanced" class="nav-item" data-nav-key="advanced"><span class="nav-icon">🚀</span><span class="nav-text">고급반 공부방</span></a>
+        <a href="intermediate.html?course=grade" class="nav-item" data-nav-key="grade"><span class="nav-icon">🏅</span><span class="nav-text">급수반 공부방</span></a>
+        <a href="editorial.html" class="nav-item" data-nav-key="editorial"><span class="nav-icon">📰</span><span class="nav-text">사설연습</span></a>
+        <a href="random.html" class="nav-item" data-nav-key="random"><span class="nav-icon">🎲</span><span class="nav-text">약어랜덤</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="promotion" open>
+      <summary class="nav-section-title"><span>승급·시험</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="unlock-room.html" class="nav-item" id="unlockRoomNavItem" data-nav-key="unlock-room"><span class="nav-icon">🎯</span><span class="nav-text" id="unlockRoomNavText">진도 승급실</span></a>
+        <a href="exam.html" class="nav-item active" data-nav-key="exam"><span class="nav-icon">🎓</span><span class="nav-text">입문반 졸업시험</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="tools">
+      <summary class="nav-section-title"><span>학습도구</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="toksori2.html" class="nav-item" data-nav-key="toksori2"><span class="nav-icon">📝</span><span class="nav-text">똑소리2</span></a>
+        <a href="wrong-note.html" class="nav-item" data-nav-key="wrong-note"><span class="nav-icon">🧾</span><span class="nav-text">오답노트</span></a>
+        <a href="abbr-dictionary.html" class="nav-item" data-nav-key="abbr-dictionary"><span class="nav-icon">📚</span><span class="nav-text">약어사전</span></a>
+        <a href="measure.html" class="nav-item" data-nav-key="measure"><span class="nav-icon">⏱️</span><span class="nav-text">자수측정</span></a>
+        <a href="sparta.html" class="nav-item" data-nav-key="sparta"><span class="nav-icon">🔥</span><span class="nav-text">스파르타</span></a>
+        <a href="king.html" class="nav-item" data-nav-key="king"><span class="nav-icon">👑</span><span class="nav-text">타자왕</span></a>
+      </div>
+    </details>
+  </div>
+  <div class="sidebar-footer">
+    <div class="profile-card" onclick="window.SorizavaAuth && window.SorizavaAuth.signOut ? window.SorizavaAuth.signOut() : (window.logout && window.logout())">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-meta">
+        <div class="profile-name" id="userNameSide">User</div>
+        <div class="profile-action">로그아웃</div>
+      </div>
+    </div>
+    <button id="adminBtn" class="admin-trigger" onclick="location.href='admin.html'" style="display:none;">⚙️ 관리자 페이지</button>
+  </div>
+</nav>
+
+<main class="main-content exam-main-v18">
+    <section class="exam-v18-card">
+        <header class="exam-v18-header">
+            <div class="exam-v18-title-wrap">
+                <span class="exam-v18-icon">🎓</span>
+                <h1>입문반 졸업 시험</h1>
+                <span class="exam-v18-progress" id="stat-progress">[통과 세트: 0/9]</span>
+            </div>
+            <button onclick="logout()" class="exam-v18-logout">로그아웃</button>
+        </header>
+
+        <div class="exam-v18-divider"></div>
+
+        <section class="exam-v18-toolbar">
+            <div class="exam-v18-set">
+                <label for="set-selector">문제 세트</label>
+                <select id="set-selector">
+                    <option value="1">제 1세트</option><option value="2">제 2세트</option><option value="3">제 3세트</option>
+                    <option value="4">제 4세트</option><option value="5">제 5세트</option><option value="6">제 6세트</option>
+                    <option value="7">제 7세트</option><option value="8">제 8세트</option><option value="9">제 9세트</option>
+                </select>
+            </div>
+
+            <div class="exam-v18-actions">
+                <button onclick="startPractice()" class="exam-v18-btn exam-v18-primary">🚀 연습 시작</button>
+                <button class="exam-v18-btn exam-v18-secondary" onclick="toggleHistory()">📊 결과 기록함</button>
+            </div>
+        </section>
+
+        <section class="exam-v18-section exam-v18-sentence-section">
+            <div class="exam-v18-label exam-v18-purple-label">연습 문장</div>
+            <div id="text-display">세트를 선택하고 연습 시작을 눌러주세요.</div>
+        </section>
+
+        <section class="exam-v18-section">
+            <div class="exam-v18-label exam-v18-orange-label">입력 (Enter = 제출)</div>
+            <input type="text" id="typing-input" disabled autocomplete="off" placeholder="연습 시작 버튼을 누르면 입력할 수 있습니다.">
+        </section>
+
+        <section class="exam-v18-stats" aria-label="실시간 입력 상태">
+            <article class="exam-v18-stat-card">
+                <div class="exam-v18-stat-icon speed">◴</div>
+                <div>
+                    <div class="exam-v18-stat-label">실시간 속도</div>
+                    <div class="exam-v18-stat-value"><span id="live-speed">0</span><span>자</span></div>
+                </div>
+            </article>
+            <article class="exam-v18-stat-card">
+                <div class="exam-v18-stat-icon backspace">↩</div>
+                <div>
+                    <div class="exam-v18-stat-label">백키 횟수</div>
+                    <div class="exam-v18-stat-value"><span id="live-backspace">0</span><span>회</span></div>
+                </div>
+            </article>
+            <article class="exam-v18-stat-card">
+                <div class="exam-v18-stat-icon error">△</div>
+                <div>
+                    <div class="exam-v18-stat-label">오타 개수</div>
+                    <div class="exam-v18-stat-value"><span id="live-errors">0</span><span>개</span></div>
+                </div>
+            </article>
+            <article class="exam-v18-stat-card">
+                <div class="exam-v18-stat-icon accuracy">◎</div>
+                <div>
+                    <div class="exam-v18-stat-label">정확도</div>
+                    <div class="exam-v18-stat-value"><span id="live-accuracy">0</span><span>%</span></div>
+                </div>
+            </article>
+        </section>
+
+        <section id="history-section" class="exam-v18-history">
+            <h3 class="exam-v18-history-title">최근 응시 기록</h3>
+            <div class="exam-v18-table-wrap">
+                <table id="result-table">
+                    <thead>
+                        <tr><th>세트</th><th>평균속도</th><th>약어정확도</th><th>백키</th><th>최종결과</th></tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/records.js?v=20260601-fixes"></script>
+<script src="assets/js/exam.js?v=20260601-fixes"></script>
+<script src="assets/js/responsive-sidebar.js?v=shell-20260501-study-timer"></script>
+  <script src="assets/js/mobile-keyboard-blocker.js?v=20260601-external-keyboard-safe"></script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHORTHAND PRO - 중급반 공부방</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="assets/css/intermediate.css?v=20260613-admin-materials-v1">
+  <link rel="stylesheet" href="assets/css/responsive-sidebar.css?v=unlock-room-separate-20260529-v1">
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v2">
+  <link rel="stylesheet" href="assets/css/intermediate-reference.css?v=20260613-admin-materials-v1">
+</head>
+<body class="ui-redesign ui-intermediate material-library-mode" data-auth="approved" data-manual-boot="true">
+  <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <div id="app-wrapper">
+    <nav class="sidebar" aria-label="주 메뉴">
+  <div class="sidebar-top">
+    <div class="logo">⚡ SHORTHAND</div>
+    <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="메뉴 닫기">×</button>
+  </div>
+  <div class="nav-list nav-groups">
+    <details class="nav-section" data-nav-section="my-learning">
+      <summary class="nav-section-title"><span>나의 학습</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="index.html" class="nav-item" data-nav-key="dashboard"><span class="nav-icon">📊</span><span class="nav-text">대시보드</span></a>
+        <a href="ai-teacher.html" class="nav-item ai-nav-highlight" data-nav-key="ai-teacher"><span class="nav-icon">🤖</span><span class="nav-text">AI 선생님 피드백방</span></a>
+        <a href="mypage.html" class="nav-item" data-nav-key="mypage"><span class="nav-icon">👤</span><span class="nav-text">마이페이지</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="study-room" open>
+      <summary class="nav-section-title"><span>공부방</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="intermediate.html" class="nav-item active" data-nav-key="intermediate"><span class="nav-icon">🧩</span><span class="nav-text">중급반 공부방</span></a>
+        <a href="intermediate.html?course=advanced" class="nav-item" data-nav-key="advanced"><span class="nav-icon">🚀</span><span class="nav-text">고급반 공부방</span></a>
+        <a href="intermediate.html?course=grade" class="nav-item" data-nav-key="grade"><span class="nav-icon">🏅</span><span class="nav-text">급수반 공부방</span></a>
+        <a href="editorial.html" class="nav-item" data-nav-key="editorial"><span class="nav-icon">📰</span><span class="nav-text">사설연습</span></a>
+        <a href="random.html" class="nav-item" data-nav-key="random"><span class="nav-icon">🎲</span><span class="nav-text">약어랜덤</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="promotion">
+      <summary class="nav-section-title"><span>승급·시험</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="unlock-room.html" class="nav-item" id="unlockRoomNavItem" data-nav-key="unlock-room"><span class="nav-icon">🎯</span><span class="nav-text" id="unlockRoomNavText">진도 승급실</span></a>
+        <a href="exam.html" class="nav-item" data-nav-key="exam"><span class="nav-icon">🎓</span><span class="nav-text">입문반 졸업시험</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="tools">
+      <summary class="nav-section-title"><span>학습도구</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="toksori2.html" class="nav-item" data-nav-key="toksori2"><span class="nav-icon">📝</span><span class="nav-text">똑소리2</span></a>
+        <a href="wrong-note.html" class="nav-item" data-nav-key="wrong-note"><span class="nav-icon">🧾</span><span class="nav-text">오답노트</span></a>
+        <a href="abbr-dictionary.html" class="nav-item" data-nav-key="abbr-dictionary"><span class="nav-icon">📚</span><span class="nav-text">약어사전</span></a>
+        <a href="measure.html" class="nav-item" data-nav-key="measure"><span class="nav-icon">⏱️</span><span class="nav-text">자수측정</span></a>
+        <a href="sparta.html" class="nav-item" data-nav-key="sparta"><span class="nav-icon">🔥</span><span class="nav-text">스파르타</span></a>
+        <a href="king.html" class="nav-item" data-nav-key="king"><span class="nav-icon">👑</span><span class="nav-text">타자왕</span></a>
+      </div>
+    </details>
+  </div>
+  <div class="sidebar-footer">
+    <div class="profile-card" onclick="window.SorizavaAuth && window.SorizavaAuth.signOut ? window.SorizavaAuth.signOut() : (window.logout && window.logout())">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-meta">
+        <div class="profile-name" id="userNameSide">User</div>
+        <div class="profile-action">로그아웃</div>
+      </div>
+    </div>
+    <button id="adminBtn" class="admin-trigger" onclick="location.href='admin.html'" style="display:none;">⚙️ 관리자 페이지</button>
+  </div>
+</nav>
+
+    <main class="main-content">
+      <div class="page-header">
+        <div class="page-title material-page-title">
+          <div class="page-title-icon" aria-hidden="true">✎</div>
+          <div class="page-title-copy">
+            <h2>중급반 공부방</h2>
+            <p>속도, 유형, 난이도를 선택하고 원하는 자료로 연습하세요.</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="material-library-screen" id="materialLibraryScreen" aria-label="자료 목록">
+        <div class="material-workflow-grid">
+          <section class="material-workflow-main" aria-label="자료 선택 단계">
+            <section class="selection-deck material-filter-deck material-step-stack">
+              <section class="level-card workflow-step step-speed">
+                <div class="step-heading">
+                  <span class="step-no">1</span>
+                  <div>
+                    <div class="level-title">속도 선택</div>
+                    <div class="level-help">연습할 속도를 먼저 선택하세요.</div>
+                  </div>
+                  <div class="count-badge" id="sourceCountTop">0자</div>
+                </div>
+                <div class="level-list" id="levelList"></div>
+              </section>
+
+              <section class="type-card workflow-step">
+                <div class="step-heading">
+                  <span class="step-no">2</span>
+                  <div>
+                    <div class="level-title">유형 선택</div>
+                    <div class="level-help">연설 또는 논설 자료를 선택합니다.</div>
+                  </div>
+                </div>
+                <div class="type-list compact-two">
+                  <button type="button" class="type-filter-btn active" data-material-type="speech" onclick="setMaterialTypeFilter('speech')">🎤 연설</button>
+                  <button type="button" class="type-filter-btn" data-material-type="essay" onclick="setMaterialTypeFilter('essay')">🧾 논설</button>
+                </div>
+              </section>
+
+              <section class="difficulty-card workflow-step">
+                <div class="step-heading">
+                  <span class="step-no">3</span>
+                  <div>
+                    <div class="level-title">자료 난이도 선택</div>
+                    <div class="level-help">정확도 회복은 워밍업, 기존 난이도는 실전으로 관리합니다.</div>
+                  </div>
+                </div>
+                <div class="difficulty-list">
+                  <button type="button" class="difficulty-filter-btn active" data-material-difficulty="warmup" onclick="setMaterialDifficultyFilter('warmup')">워밍업</button>
+                  <button type="button" class="difficulty-filter-btn" data-material-difficulty="real" onclick="setMaterialDifficultyFilter('real')">실전</button>
+                </div>
+              </section>
+
+              <section class="material-card material-search-card workflow-step">
+                <div class="step-heading search-step-heading">
+                  <span class="step-no">4</span>
+                  <div>
+                    <div class="level-title">자료 선택</div>
+                    <div class="level-help">자료를 클릭하면 오른쪽에서 바로 시작할 수 있습니다.</div>
+                  </div>
+                </div>
+                <div class="material-search-wrap">
+                  <input id="materialSearchInput" type="search" autocomplete="off" placeholder="자료명, 번호, 원문 단어 검색">
+                  <button type="button" class="btn-secondary search-clear-btn" onclick="clearMaterialSearch()">초기화</button>
+                </div>
+                <select id="materialSelect" class="material-select-hidden" aria-hidden="true" tabindex="-1"></select>
+                <div class="material-meta inline-meta">
+                  <span class="count-badge" id="materialCount">0개 자료</span>
+                  <span id="materialNotice">등록된 자료를 불러오는 중입니다.</span>
+                </div>
+              </section>
+            </section>
+
+            <section class="material-list-card workflow-step-list">
+              <div class="material-list-head">
+                <div>
+                  <strong>자료 찾기</strong>
+                  <span id="materialListSubtitle">선택 조건에 맞는 자료를 표시합니다.</span>
+                </div>
+                <div class="material-list-hint">자료명은 업로드한 파일명 기준으로 표시됩니다.</div>
+              </div>
+              <div class="material-table-wrap">
+                <table class="material-table" aria-label="자료 목록">
+                  <thead>
+                    <tr>
+                      <th class="select-col">선택</th>
+                      <th>자료명</th>
+                      <th>유형</th>
+                      <th>난이도</th>
+                      <th>최근 정확도</th>
+                    </tr>
+                  </thead>
+                  <tbody id="materialTableBody">
+                    <tr><td colspan="5" class="material-empty-row">자료를 불러오는 중입니다.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="material-pager" id="materialPager"></div>
+            </section>
+          </section>
+
+          <aside class="practice-start-card" aria-label="연습 시작">
+            <div class="practice-start-head">
+              <span class="step-no green">5</span>
+              <strong>연습 시작</strong>
+            </div>
+            <div class="selected-material-card" id="librarySelectedCard">
+              <span class="selected-label">선택된 자료</span>
+              <strong id="librarySelectedTitle">자료 없음</strong>
+              <div class="selected-tags" id="librarySelectedTags"></div>
+              <div class="selected-accuracy-block">
+                <span>최근 정확도</span>
+                <b id="librarySelectedAccuracy">-</b>
+              </div>
+            </div>
+            <button type="button" class="start-practice-btn primary" id="libraryStartViewBtn" onclick="startSelectedMaterialPractice('view')">▶ 보고치기 시작</button>
+            <button type="button" class="start-practice-btn secondary" id="libraryStartListenBtn" onclick="startSelectedMaterialPractice('listen')">🎧 듣고치기 시작</button>
+            <button type="button" class="start-practice-btn subtle" onclick="clearLibraryMaterialSelection()">다른 자료 고르기</button>
+            <div class="start-hint" id="libraryStartHint">자료를 먼저 선택하면 시작 버튼이 활성화됩니다.</div>
+          </aside>
+        </div>
+
+        <section class="practice-preview-card" aria-label="연습 화면 미리보기">
+          <div class="preview-title">연습 화면 미리보기</div>
+          <div class="practice-preview-grid">
+            <div class="preview-mini-panel">
+              <strong>자료(원고)</strong>
+              <div class="preview-lines"><span></span><span></span><span></span></div>
+            </div>
+            <div class="preview-arrow">→</div>
+            <div class="preview-mini-panel">
+              <strong>입력 영역</strong>
+              <div class="preview-input-lines"><span></span><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="practice-screen" id="practiceScreen" hidden>
+        <section class="practice-current-card">
+          <div class="practice-current-main">
+            <span id="practiceCurrentMeta">자료 미선택</span>
+            <strong id="practiceCurrentTitle">자료 없음</strong>
+          </div>
+          <div class="practice-current-actions">
+            <button type="button" class="btn-secondary" onclick="showMaterialLibrary()">← 자료 목록으로</button>
+          </div>
+        </section>
+
+        <section class="mode-card practice-mode-card">
+          <div class="mode-title">연습 방식 선택</div>
+          <div class="mode-button-grid">
+            <button type="button" class="mode-btn active" id="modeViewBtn" onclick="setMode('view')">👁️ 보고 치기</button>
+            <button type="button" class="mode-btn" id="modeListenBtn" onclick="setMode('listen')">🎧 듣고 치기</button>
+          </div>
+        </section>
+
+      <section class="paragraph-card" id="paragraphCard">
+        <div class="paragraph-head">
+          <div>
+            <strong>단락치기</strong>
+            <span>문단별 1분 연습</span>
+          </div>
+          <div class="paragraph-rule">문단 선택</div>
+        </div>
+        <div class="paragraph-buttons" id="paragraphButtons"></div>
+      </section>
+
+      <section class="study-layout">
+        <aside class="source-panel">
+          <div class="panel-top source-panel-top">
+            <div class="panel-title">지문(참고)</div>
+            <div class="source-tools">
+              <span class="count-badge source-material-badge"><span id="currentLevelLabel">110자</span> · <span id="currentMaterialTitle">자료 없음</span></span>
+              <button type="button" class="abbr-toggle off" id="abbrToggleBtn" onclick="toggleAbbreviationDisplay()">약어표시 OFF</button>
+              <span class="abbr-count" id="abbrCountLabel">약어 0개</span>
+              <span class="count-badge" id="sourceCount">0자</span>
+            </div>
+          </div>
+
+          <div class="pace-status-line" id="paceStatusLine">
+            <span>🏃 페이스메이커</span>
+            <b id="paceSpeedLabel">110</b>자 페이스 · <em id="paceStatus">입력을 시작하면 자동으로 출발합니다.</em>
+          </div>
+
+          <div class="source-readonly" id="sourceReadonly"></div>
+
+          <div class="listen-mask" id="listenMask">
+            <div>
+              <strong>듣고 치기 모드</strong><br>
+              원문은 화면에 표시되지 않습니다.<br>
+              오디오를 듣고 입력하세요.
+            </div>
+          </div>
+
+        </aside>
+
+        <section class="practice-card">
+          <div class="panel-top practice-panel-top">
+            <div>
+              <div class="panel-title">입력 영역</div>
+              <div class="practice-subtitle"><span id="practiceTitle">110자 중급반 연습</span> · <span id="modeLabel">보고 치기</span></div>
+            </div>
+            <div class="practice-top-actions">
+              <span class="count-badge" id="typingCount">0자</span>
+            </div>
+          </div>
+
+          <div class="stats-grid input-stat-grid" aria-label="입력 현황">
+            <div class="stat-card stat-time"><span class="stat-label">시간</span><span class="stat-readout"><span class="stat-value" id="timer">00:00</span></span></div>
+            <div class="stat-card stat-accuracy"><span class="stat-label">정확도</span><span class="stat-readout"><span class="stat-value" id="liveAccuracyDisplay">0</span><span class="stat-unit">%</span></span></div>
+            <div class="stat-card stat-speed"><span class="stat-label">속도</span><span class="stat-readout"><span class="stat-value" id="speedDisplay">0</span><span class="stat-unit">타/분</span></span></div>
+            <div class="stat-card stat-backspace"><span class="stat-label">백스페이스</span><span class="stat-readout"><span class="stat-value" id="backspaceVal">0</span><span class="stat-unit">회</span></span></div>
+          </div>
+          <span id="charVal" class="visually-hidden" aria-hidden="true">0</span>
+
+          <div class="audio-panel" id="audioPanel">
+            <div class="audio-top">
+              <div class="audio-title">🎧 등록 오디오 재생</div>
+              <span class="count-badge" id="audioFileName">오디오 없음</span>
+            </div>
+            <div class="audio-seek">
+              <span class="time-info" id="currentTime">0:00</span>
+              <input type="range" id="seekBar" value="0" min="0" max="100" step="0.1">
+              <span class="time-info" id="totalTime">0:00</span>
+            </div>
+            <div class="audio-controls">
+              <button class="btn-secondary" onclick="skipAudio(-3)">⏪ 3초</button>
+              <button class="btn-primary" id="playBtn" onclick="toggleAudio()">▶ 재생</button>
+              <button class="btn-secondary" onclick="skipAudio(3)">3초 ⏩</button>
+              <div class="speed-control">
+                <button onclick="adjustSpeed(-0.1)">-</button>
+                <span class="speed-display" id="audioSpeed">1.0</span>
+                <button onclick="adjustSpeed(0.1)">+</button>
+              </div>
+            </div>
+            <div class="smart-pause-line">
+              <span class="smart-pause-label-wrap">
+                <label><input type="checkbox" id="smartPauseToggle"> 스마트 일시정지</label>
+                <span class="info-tooltip" tabindex="0" aria-label="입력을 일정 시간 멈추면 오디오가 자동으로 일시정지되고, 다시 입력하면 이어서 재생됩니다." data-tooltip="입력을 일정 시간 멈추면 오디오가 자동으로 일시정지되고, 다시 입력하면 이어서 재생됩니다. 긴 듣고치기에서 놓친 구간을 줄이는 기능입니다.">i</span>
+              </span>
+              <input type="number" id="smartPauseTime" value="1.5" min="0.5" max="5" step="0.1"> 초 입력 멈춤 시 일시정지
+              <span style="margin-left:auto;">남은 오디오 <b id="audioLeft">0</b>초</span>
+            </div>
+          </div>
+
+          <textarea id="typingArea" spellcheck="false" wrap="soft" placeholder="여기를 클릭하고 입력을 시작하세요. ESC 키를 누르면 바로 채점됩니다."></textarea>
+          <div class="smart-pause-alert" id="smartPauseAlert" aria-live="assertive">
+            <strong>⚠ 스마트 일시정지 발동</strong>
+            <span>현재 속도를 따라가지 못하고 있습니다. 멈추지 말고 바로 이어서 입력하세요.</span>
+          </div>
+
+          <div class="practice-actions">
+            <div class="tip-text" id="practiceTip">Tip: ESC 키로 채점합니다.</div>
+            <div class="btn-row">
+              <button class="btn-secondary" onclick="resetPractice()">🔄 리셋</button>
+              <button class="btn-primary" onclick="finishPractice()">💯 채점하기</button>
+            </div>
+          </div>
+        </section>
+      </section>
+      </section>
+
+      <section class="history-card">
+        <div class="history-top">
+          <div class="history-title">최근 연습 기록</div>
+          <button class="btn-secondary" onclick="clearHistory()">기록 초기화</button>
+        </div>
+        <ul class="history-list" id="historyList"></ul>
+      </section>
+    </main>
+
+  </div>
+
+  <div id="resultModal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h3 id="resultModalTitle" style="text-align:center; margin-top:0; color:var(--text-dark);">📊 채점 결과</h3>
+      <div class="score-circle">
+        <div class="score-number" id="finalScore">0%</div>
+        <div class="score-label">정확도</div>
+      </div>
+      <div class="score-grade" id="scoreGrade"></div>
+      <div class="score-detail" id="scoreDetail"></div>
+      <h4 style="margin-bottom:10px; color:var(--text-dark);">상세 비교</h4>
+      <div class="diff-view" id="diffOutput"></div>
+      <div class="modal-actions">
+        <button class="btn-secondary" onclick="openStudyRoom()">진도 현황 보기</button>
+        <button class="btn-primary" onclick="closeModal()">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audioPlayer"></audio>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/records.js?v=20260601-fixes2"></script>
+  <script src="assets/js/intermediate.js?v=20260613-admin-materials-v1"></script>
+  <script src="assets/js/responsive-sidebar.js?v=unlock-room-separate-20260529-v1"></script>
+  <script src="assets/js/mobile-keyboard-blocker.js?v=20260601-external-keyboard-safe"></script>
+</body>
+</html>

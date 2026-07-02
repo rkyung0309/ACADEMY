@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원가입 - SHORTHAND PRO</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="assets/css/auth.css">
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v1">
+</head>
+<body>
+<div id="loading-overlay"><div class="spinner"></div></div>
+<div class="auth-shell">
+  <div class="auth-card">
+    <div class="auth-logo">SORIZAVA ACADEMY</div>
+    <h1 class="auth-title">회원가입</h1>
+    <p class="auth-sub">가입 후 운영팀 승인을 받아야 연습 페이지를 사용할 수 있습니다.</p>
+    <div class="field"><label>이름</label><input id="name" autocomplete="name" placeholder="예: 홍길동"></div>
+    <div class="field"><label>이메일</label><input id="email" type="email" autocomplete="email" placeholder="로그인에 사용할 이메일"></div>
+    <div class="field"><label>비밀번호</label><input id="password" type="password" autocomplete="new-password" placeholder="6자 이상 권장"></div>
+    <div class="field"><label>아카데미 ID</label><input id="academy_id" placeholder="선택 입력"></div>
+    <div class="field"><label>연락처</label><input id="phone" placeholder="선택 입력"></div>
+    <button class="btn-main" onclick="submitSignup()">가입 신청하기</button>
+    <div class="error-text" id="errorText"></div>
+    <div class="auth-actions"><a class="btn-sub" href="index.html">← 로그인으로</a></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script>
+async function submitSignup(){
+  const name=document.getElementById('name').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const password=document.getElementById('password').value;
+  const academy_id=document.getElementById('academy_id').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const err=document.getElementById('errorText');
+  err.textContent='';
+  if(!name||!email||!password){err.textContent='이름, 이메일, 비밀번호는 필수입니다.';return;}
+  document.getElementById('loading-overlay').style.display='flex';
+  try{
+    await window.SorizavaAuth.signUp({email,password,name,academy_id,phone});
+    location.href='pending.html';
+  }catch(e){
+    console.error(e); err.textContent=e.message || '가입 신청에 실패했습니다.';
+  }finally{document.getElementById('loading-overlay').style.display='none';}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHORTHAND PRO - 실시간 자수측정</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="assets/css/measure.css?v=20260601-fixes">
+    <link rel="stylesheet" href="assets/css/responsive-sidebar.css?v=shell-20260501-study-timer">
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v1">
+  <link rel="stylesheet" href="assets/css/sorizava-ui-refresh.css?v=20260611-ui-only">
+  <link rel="stylesheet" href="assets/css/measure-redesign.css?v=20260612-single-card-3sec">
+</head>
+<body class="measure-page" data-auth="approved">
+
+<button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<div id="resultLayer">
+    <div class="result-box">
+        <h2 style="color:var(--text-dark); margin-top:0;">측정 완료 🎉</h2>
+        <div id="summaryDisplay" style="font-size:1.1rem; line-height:2; margin:25px 0; color:#555;"></div>
+        <button class="btn-primary" onclick="closeResult()" style="width:100%;">확인 (기록 저장됨)</button>
+    </div>
+</div>
+
+<nav class="sidebar" aria-label="주 메뉴">
+  <div class="sidebar-top">
+    <div class="logo">⚡ SHORTHAND</div>
+    <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="메뉴 닫기">×</button>
+  </div>
+  <div class="nav-list nav-groups">
+    <details class="nav-section" data-nav-section="my-learning">
+      <summary class="nav-section-title"><span>나의 학습</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="index.html" class="nav-item" data-nav-key="dashboard"><span class="nav-icon">📊</span><span class="nav-text">대시보드</span></a>
+        <a href="ai-teacher.html" class="nav-item ai-nav-highlight" data-nav-key="ai-teacher"><span class="nav-icon">🤖</span><span class="nav-text">AI 선생님 피드백방</span></a>
+        <a href="mypage.html" class="nav-item" data-nav-key="mypage"><span class="nav-icon">👤</span><span class="nav-text">마이페이지</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="study-room">
+      <summary class="nav-section-title"><span>공부방</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="intermediate.html" class="nav-item" data-nav-key="intermediate"><span class="nav-icon">🧩</span><span class="nav-text">중급반 공부방</span></a>
+        <a href="intermediate.html?course=advanced" class="nav-item" data-nav-key="advanced"><span class="nav-icon">🚀</span><span class="nav-text">고급반 공부방</span></a>
+        <a href="intermediate.html?course=grade" class="nav-item" data-nav-key="grade"><span class="nav-icon">🏅</span><span class="nav-text">급수반 공부방</span></a>
+        <a href="editorial.html" class="nav-item" data-nav-key="editorial"><span class="nav-icon">📰</span><span class="nav-text">사설연습</span></a>
+        <a href="random.html" class="nav-item" data-nav-key="random"><span class="nav-icon">🎲</span><span class="nav-text">약어랜덤</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="promotion">
+      <summary class="nav-section-title"><span>승급·시험</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="unlock-room.html" class="nav-item" id="unlockRoomNavItem" data-nav-key="unlock-room"><span class="nav-icon">🎯</span><span class="nav-text" id="unlockRoomNavText">진도 승급실</span></a>
+        <a href="exam.html" class="nav-item" data-nav-key="exam"><span class="nav-icon">🎓</span><span class="nav-text">입문반 졸업시험</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="tools" open>
+      <summary class="nav-section-title"><span>학습도구</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="toksori2.html" class="nav-item" data-nav-key="toksori2"><span class="nav-icon">📝</span><span class="nav-text">똑소리2</span></a>
+        <a href="wrong-note.html" class="nav-item" data-nav-key="wrong-note"><span class="nav-icon">🧾</span><span class="nav-text">오답노트</span></a>
+        <a href="abbr-dictionary.html" class="nav-item" data-nav-key="abbr-dictionary"><span class="nav-icon">📚</span><span class="nav-text">약어사전</span></a>
+        <a href="measure.html" class="nav-item active" data-nav-key="measure"><span class="nav-icon">⏱️</span><span class="nav-text">자수측정</span></a>
+        <a href="sparta.html" class="nav-item" data-nav-key="sparta"><span class="nav-icon">🔥</span><span class="nav-text">스파르타</span></a>
+        <a href="king.html" class="nav-item" data-nav-key="king"><span class="nav-icon">👑</span><span class="nav-text">타자왕</span></a>
+      </div>
+    </details>
+  </div>
+  <div class="sidebar-footer">
+    <div class="profile-card" onclick="window.SorizavaAuth && window.SorizavaAuth.signOut ? window.SorizavaAuth.signOut() : (window.logout && window.logout())">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-meta">
+        <div class="profile-name" id="userNameSide">User</div>
+        <div class="profile-action">로그아웃</div>
+      </div>
+    </div>
+    <button id="adminBtn" class="admin-trigger" onclick="location.href='admin.html'" style="display:none;">⚙️ 관리자 페이지</button>
+  </div>
+</nav>
+
+<main class="main-content measure-main">
+    <section class="measure-card" aria-labelledby="measureTitle">
+        <div class="measure-card-header">
+            <div class="measure-title-area">
+                <div class="measure-kicker">학습도구</div>
+                <h2 id="measureTitle"><span class="measure-title-icon">⌨️</span> 자수 측정</h2>
+                <p>음성을 들으며 타이핑한 글자 수와 현재 타수를 실시간으로 확인합니다.</p>
+            </div>
+
+            <div class="smart-pause-group measure-smart-pause" aria-label="스마트 일시정지 설정">
+                <div class="smart-pause-label">
+                    <span>⚡ 스마트 일시정지</span>
+                    <div class="tooltip-container">
+                        <div class="tooltip-icon">?</div>
+                        <span class="tooltip-text">
+                            타이핑을 멈추면 오디오가 자동으로 일시정지되고, 다시 입력하면 재생됩니다.
+                            입력창 테두리가 붉게 변하면 멈춘 상태입니다.
+                        </span>
+                    </div>
+                </div>
+                <label class="toggle-switch" aria-label="스마트 일시정지 사용">
+                    <input type="checkbox" id="smartPauseToggle" checked>
+                    <span class="slider"></span>
+                </label>
+                <div class="smart-pause-delay" aria-label="일시정지 대기 시간">
+                    <input type="number" id="smartPauseTime" class="time-input" value="1.0" step="0.1" min="0.5" max="5.0">
+                    <span>초</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-grid measure-stats-grid" aria-label="측정 현황">
+            <div class="stat-card measure-stat-card stat-time-card">
+                <div class="stat-icon">⏱️</div>
+                <span class="stat-label">측정 시간</span>
+                <div class="stat-number-row"><span id="timeVal" class="stat-value">00:00</span></div>
+            </div>
+            <div class="stat-card measure-stat-card stat-char-card">
+                <div class="stat-icon">🔤</div>
+                <span class="stat-label">입력 글자 수</span>
+                <div class="stat-number-row"><span id="charVal" class="stat-value">0</span><small>자</small></div>
+            </div>
+            <div class="stat-card measure-stat-card stat-speed-card">
+                <div class="stat-icon">⚡</div>
+                <span class="stat-label">현재 타수</span>
+                <div class="stat-number-row"><span id="speedVal" class="stat-value">0</span><small>CPM</small></div>
+            </div>
+            <div class="stat-card measure-stat-card stat-audio-card">
+                <div class="stat-icon">🔊</div>
+                <span class="stat-label">남은 음성</span>
+                <div class="stat-number-row"><span id="audioVal" class="stat-value">00:00</span></div>
+            </div>
+        </div>
+
+        <div class="audio-bar-container measure-audio-panel" aria-label="음성 재생 위치">
+            <button type="button" class="audio-mini-button" id="miniPlayBtn" onclick="toggleAudio()" aria-label="음성 재생 또는 일시정지">▶</button>
+            <span class="time-info" id="currentTime">0:00</span>
+            <div class="waveform-track">
+                <div class="waveform-visual" aria-hidden="true"></div>
+                <input type="range" id="seekBar" value="0" step="0.1" min="0" max="100" aria-label="음성 재생 위치 조절">
+            </div>
+            <span class="time-info" id="totalTime">0:00</span>
+        </div>
+
+        <div class="typing-field-wrap">
+            <textarea id="typingArea" spellcheck="false" placeholder=" "></textarea>
+            <div class="typing-empty-guide" aria-hidden="true">
+                <div class="typing-guide-icon">✍️</div>
+                <p>타이핑을 시작하면 측정이 자동으로 시작됩니다.</p>
+                <p>ESC 키를 누르면 측정이 종료되고 결과가 표시됩니다.</p>
+            </div>
+        </div>
+
+        <div class="control-bar measure-control-bar" aria-label="음성 조작 메뉴">
+            <div class="btn-group measure-control-group">
+                <button type="button" class="control-btn control-file" onclick="document.getElementById('audioFile').click()">
+                    <span class="control-icon">📂</span><strong>음성 파일 열기</strong>
+                </button>
+                <input type="file" id="audioFile" accept="audio/*">
+
+                <button type="button" class="control-btn" onclick="skipAudio(-3)" title="단축키 F7">
+                    <span class="control-icon">⏪</span><strong>3초 뒤로</strong><small>F7</small>
+                </button>
+                <button type="button" class="control-btn control-primary" onclick="toggleAudio()" id="playBtn">
+                    <span class="control-icon">▶</span><strong>재생 시작</strong>
+                </button>
+                <button type="button" class="control-btn" onclick="skipAudio(3)" title="단축키 F6">
+                    <span class="control-icon">⏩</span><strong>3초 앞으로</strong><small>F6</small>
+                </button>
+
+                <div class="speed-control measure-speed-control" aria-label="재생 속도 조절">
+                    <span class="speed-label">재생 속도</span>
+                    <div class="speed-stepper">
+                        <button type="button" class="speed-btn" onclick="adjustSpeed(-0.1)" aria-label="재생 속도 낮추기">−</button>
+                        <span class="speed-display" id="speedDisplay">1.0x</span>
+                        <button type="button" class="speed-btn" onclick="adjustSpeed(0.1)" aria-label="재생 속도 높이기">+</button>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="control-btn control-reset" onclick="resetAll()">
+                <span class="control-icon">↺</span><strong>측정 초기화</strong>
+            </button>
+        </div>
+    </section>
+
+    <section class="measure-history-card" aria-labelledby="historyTitle">
+        <div class="history-title">
+            <span id="historyTitle">📝 최근 측정 기록</span>
+            <button type="button" class="history-clear-btn" onclick="clearHistory()">🗑️ 기록 초기화</button>
+        </div>
+        <ul class="history-list" id="historyList">
+            <li class="history-empty">아직 저장된 기록이 없습니다.<br><small>측정을 완료하면 기록이 여기에 표시됩니다.</small></li>
+        </ul>
+    </section>
+</main>
+
+<audio id="audioPlayer"></audio>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+<script src="assets/js/records.js?v=20260601-fixes"></script>
+<script src="assets/js/measure.js"></script>
+<script src="assets/js/responsive-sidebar.js?v=shell-20260501-study-timer"></script>
+  <script src="assets/js/mobile-keyboard-blocker.js?v=20260601-external-keyboard-safe"></script>
+</body>
+</html>

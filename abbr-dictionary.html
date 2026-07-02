@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SHORTHAND PRO - 약어사전</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="assets/css/abbr-dictionary.css?v=abbr-v7-ui-polish">
+    <link rel="stylesheet" href="assets/css/responsive-sidebar.css?v=shell-20260501-study-timer">
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v1">
+  <link rel="stylesheet" href="assets/css/sorizava-ui-refresh.css?v=20260611-ui-only">
+</head>
+<body data-auth="approved">
+  <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+  <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <nav class="sidebar" aria-label="주 메뉴">
+  <div class="sidebar-top">
+    <div class="logo">⚡ SHORTHAND</div>
+    <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="메뉴 닫기">×</button>
+  </div>
+  <div class="nav-list nav-groups">
+    <details class="nav-section" data-nav-section="my-learning">
+      <summary class="nav-section-title"><span>나의 학습</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="index.html" class="nav-item" data-nav-key="dashboard"><span class="nav-icon">📊</span><span class="nav-text">대시보드</span></a>
+        <a href="ai-teacher.html" class="nav-item ai-nav-highlight" data-nav-key="ai-teacher"><span class="nav-icon">🤖</span><span class="nav-text">AI 선생님 피드백방</span></a>
+        <a href="mypage.html" class="nav-item" data-nav-key="mypage"><span class="nav-icon">👤</span><span class="nav-text">마이페이지</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="study-room">
+      <summary class="nav-section-title"><span>공부방</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="intermediate.html" class="nav-item" data-nav-key="intermediate"><span class="nav-icon">🧩</span><span class="nav-text">중급반 공부방</span></a>
+        <a href="intermediate.html?course=advanced" class="nav-item" data-nav-key="advanced"><span class="nav-icon">🚀</span><span class="nav-text">고급반 공부방</span></a>
+        <a href="intermediate.html?course=grade" class="nav-item" data-nav-key="grade"><span class="nav-icon">🏅</span><span class="nav-text">급수반 공부방</span></a>
+        <a href="editorial.html" class="nav-item" data-nav-key="editorial"><span class="nav-icon">📰</span><span class="nav-text">사설연습</span></a>
+        <a href="random.html" class="nav-item" data-nav-key="random"><span class="nav-icon">🎲</span><span class="nav-text">약어랜덤</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="promotion">
+      <summary class="nav-section-title"><span>승급·시험</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="unlock-room.html" class="nav-item" id="unlockRoomNavItem" data-nav-key="unlock-room"><span class="nav-icon">🎯</span><span class="nav-text" id="unlockRoomNavText">진도 승급실</span></a>
+        <a href="exam.html" class="nav-item" data-nav-key="exam"><span class="nav-icon">🎓</span><span class="nav-text">입문반 졸업시험</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="tools" open>
+      <summary class="nav-section-title"><span>학습도구</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="toksori2.html" class="nav-item" data-nav-key="toksori2"><span class="nav-icon">📝</span><span class="nav-text">똑소리2</span></a>
+        <a href="wrong-note.html" class="nav-item" data-nav-key="wrong-note"><span class="nav-icon">🧾</span><span class="nav-text">오답노트</span></a>
+        <a href="abbr-dictionary.html" class="nav-item active" data-nav-key="abbr-dictionary"><span class="nav-icon">📚</span><span class="nav-text">약어사전</span></a>
+        <a href="measure.html" class="nav-item" data-nav-key="measure"><span class="nav-icon">⏱️</span><span class="nav-text">자수측정</span></a>
+        <a href="sparta.html" class="nav-item" data-nav-key="sparta"><span class="nav-icon">🔥</span><span class="nav-text">스파르타</span></a>
+        <a href="king.html" class="nav-item" data-nav-key="king"><span class="nav-icon">👑</span><span class="nav-text">타자왕</span></a>
+      </div>
+    </details>
+  </div>
+  <div class="sidebar-footer">
+    <div class="profile-card" onclick="window.SorizavaAuth && window.SorizavaAuth.signOut ? window.SorizavaAuth.signOut() : (window.logout && window.logout())">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-meta">
+        <div class="profile-name" id="userNameSide">User</div>
+        <div class="profile-action">로그아웃</div>
+      </div>
+    </div>
+    <button id="adminBtn" class="admin-trigger" onclick="location.href='admin.html'" style="display:none;">⚙️ 관리자 페이지</button>
+  </div>
+</nav>
+
+  <main class="main-content">
+    <div class="page-header">
+      <div class="page-title">
+        <h1>📚 약어사전</h1>
+        <p>오른쪽 목록에서 약어를 클릭하면 약어 자리 기준으로 운지 자리가 표시됩니다.</p>
+      </div>
+      <div class="top-actions">
+        <button class="ghost-btn" id="defaultDictBtn">기본 약어사전 불러오기</button>
+        <label class="import-label" for="importFile">파일 불러오기</label>
+        <input type="file" id="importFile" accept=".txt,.json,.csv">
+        <button class="secondary-btn" id="downloadCsvBtn">CSV 내보내기</button>
+        <button class="secondary-btn" id="exportJsonBtn">JSON 내보내기</button>
+        <button class="primary-btn" id="clearAllBtn">전체 비우기</button>
+      </div>
+    </div>
+
+    <div id="statusMsg" class="status-msg"></div>
+
+    <section class="stats-grid">
+      <div class="stat-card"><span>등록 약어 수</span><strong id="entryCount">0</strong></div>
+      <div class="stat-card"><span>표시 키 수</span><strong id="selectedCount">0</strong></div>
+      <div class="stat-card"><span>검색 결과</span><strong id="searchCount">0</strong></div>
+      <div class="stat-card"><span>마지막 수정</span><strong id="lastUpdated">-</strong></div>
+    </section>
+
+    <section class="dictionary-layout">
+      <div class="panel keyboard-panel">
+        <div class="panel-head compact-head">
+          <div>
+            <h2>키보드 미리보기</h2>
+            <p>선택된 약어의 약어 자리가 색상으로 표시됩니다.</p>
+          </div>
+        </div>
+
+        <div class="viewer-toolbar">
+          <button class="ghost-btn" id="resetSelectionBtn">표시 해제</button>
+        </div>
+
+        <div class="word-preview">
+          <div><strong id="currentWordLabel">약어를 선택하세요</strong><small id="currentMetaLabel">오른쪽 목록에서 약어 행을 클릭하면 표시됩니다</small></div>
+        </div>
+
+        <div class="keyboard-stage"><div id="keyboardMount"></div></div>
+      </div>
+
+      <div class="dict-side">
+        <section class="panel table-panel">
+          <div class="table-top">
+            <div class="panel-head compact-head" style="margin-bottom:0;padding-bottom:0;border-bottom:0;">
+              <div>
+                <h3>등록된 약어 목록</h3>
+                <p>약어와 약어 자리만 표시합니다. 약어는 오름차순/내림차순 정렬이 가능합니다.</p>
+              </div>
+            </div>
+            <div class="search-row dual-search">
+              <input type="text" id="searchWord" placeholder="약어 검색">
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th style="width:62%;">
+                    <button type="button" class="sort-th-btn" id="sortOutputBtn">
+                      약어 <span id="sortOutputIcon">오름차순 ↑</span>
+                    </button>
+                  </th>
+                  <th style="width:38%;">약어 자리</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-client.js"></script>
+  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/abbr-bundled-data.js?v=abbr-v7-ui-polish"></script>
+  <script src="assets/js/abbr-dictionary.js?v=abbr-v7-ui-polish"></script>
+<script src="assets/js/responsive-sidebar.js?v=shell-20260501-study-timer"></script>
+  <script src="assets/js/mobile-keyboard-blocker.js?v=20260601-external-keyboard-safe"></script>
+</body>
+</html>

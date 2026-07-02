@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>마이페이지 - 똑소리 속기</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="assets/css/index.css?v=portal-20260505-clean">
+  <link rel="stylesheet" href="assets/css/responsive-sidebar.css?v=portal-20260505-clean">
+  <link rel="stylesheet" href="assets/css/learning-portal.css?v=portal-20260505-clean">
+  <link rel="stylesheet" href="assets/css/mypage-redesign.css?v=20260601-fixes2">
+  <link rel="stylesheet" href="assets/css/ai-teacher-dashboard.css?v=20260531-room-clean-v2">
+
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v1">
+</head>
+<body class="study-tools-body" data-auth="approved" data-manual-boot="true" onload="window.SorizavaPortal.initMyPage()">
+  <div id="loading-overlay"><div class="spinner"></div></div>
+  <div id="app-wrapper" style="display:none;">
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar-overlay" onclick="toggleSidebar(false)"></div>
+    <nav class="sidebar" aria-label="주 메뉴">
+  <div class="sidebar-top">
+    <div class="logo">⚡ SHORTHAND</div>
+    <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="메뉴 닫기">×</button>
+  </div>
+  <div class="nav-list nav-groups">
+    <details class="nav-section" data-nav-section="my-learning" open>
+      <summary class="nav-section-title"><span>나의 학습</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="index.html" class="nav-item" data-nav-key="dashboard"><span class="nav-icon">📊</span><span class="nav-text">대시보드</span></a>
+        <a href="ai-teacher.html" class="nav-item ai-nav-highlight" data-nav-key="ai-teacher"><span class="nav-icon">🤖</span><span class="nav-text">AI 선생님 피드백방</span></a>
+        <a href="mypage.html" class="nav-item active" data-nav-key="mypage"><span class="nav-icon">👤</span><span class="nav-text">마이페이지</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="study-room">
+      <summary class="nav-section-title"><span>공부방</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="intermediate.html" class="nav-item" data-nav-key="intermediate"><span class="nav-icon">🧩</span><span class="nav-text">중급반 공부방</span></a>
+        <a href="intermediate.html?course=advanced" class="nav-item" data-nav-key="advanced"><span class="nav-icon">🚀</span><span class="nav-text">고급반 공부방</span></a>
+        <a href="intermediate.html?course=grade" class="nav-item" data-nav-key="grade"><span class="nav-icon">🏅</span><span class="nav-text">급수반 공부방</span></a>
+        <a href="editorial.html" class="nav-item" data-nav-key="editorial"><span class="nav-icon">📰</span><span class="nav-text">사설연습</span></a>
+        <a href="random.html" class="nav-item" data-nav-key="random"><span class="nav-icon">🎲</span><span class="nav-text">약어랜덤</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="promotion">
+      <summary class="nav-section-title"><span>승급·시험</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="unlock-room.html" class="nav-item" id="unlockRoomNavItem" data-nav-key="unlock-room"><span class="nav-icon">🎯</span><span class="nav-text" id="unlockRoomNavText">진도 승급실</span></a>
+        <a href="exam.html" class="nav-item" data-nav-key="exam"><span class="nav-icon">🎓</span><span class="nav-text">입문반 졸업시험</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="tools">
+      <summary class="nav-section-title"><span>학습도구</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="toksori2.html" class="nav-item" data-nav-key="toksori2"><span class="nav-icon">📝</span><span class="nav-text">똑소리2</span></a>
+        <a href="wrong-note.html" class="nav-item" data-nav-key="wrong-note"><span class="nav-icon">🧾</span><span class="nav-text">오답노트</span></a>
+        <a href="abbr-dictionary.html" class="nav-item" data-nav-key="abbr-dictionary"><span class="nav-icon">📚</span><span class="nav-text">약어사전</span></a>
+        <a href="measure.html" class="nav-item" data-nav-key="measure"><span class="nav-icon">⏱️</span><span class="nav-text">자수측정</span></a>
+        <a href="sparta.html" class="nav-item" data-nav-key="sparta"><span class="nav-icon">🔥</span><span class="nav-text">스파르타</span></a>
+        <a href="king.html" class="nav-item" data-nav-key="king"><span class="nav-icon">👑</span><span class="nav-text">타자왕</span></a>
+      </div>
+    </details>
+  </div>
+  <div class="sidebar-footer">
+    <div class="profile-card" onclick="window.SorizavaAuth && window.SorizavaAuth.signOut ? window.SorizavaAuth.signOut() : (window.logout && window.logout())">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-meta">
+        <div class="profile-name" id="userNameSide">User</div>
+        <div class="profile-action">로그아웃</div>
+      </div>
+    </div>
+    <button id="adminBtn" class="admin-trigger" onclick="location.href='admin.html'" style="display:none;">⚙️ 관리자 페이지</button>
+  </div>
+</nav>
+    <main class="main-content portal-main">
+<section class="portal-page mypage-page mypage-redesign" data-portal-page="mypage">
+  <header class="my-clean-header">
+    <div>
+      <p class="portal-kicker">마이페이지</p>
+      <h1 id="mypageTitle">내 학습 관리</h1>
+      <p id="mypageSubtitle">학습 기록, 피드백, 오답, 계정 상태를 한 화면에서 확인합니다.</p>
+    </div>
+    <div class="portal-topbar-actions">
+      <a class="portal-btn secondary" href="ai-teacher.html">AI 선생님 피드백방</a>
+      <a class="portal-btn primary" href="intermediate.html">내 공부방 바로가기</a>
+    </div>
+  </header>
+
+  <div class="mypage-shell">
+    <aside class="mypage-sidebar-panel">
+      <div class="my-profile-block">
+        <div class="portal-avatar-lg" id="myAvatar">U</div>
+        <div>
+          <b id="myName">사용자</b>
+          <span id="myMeta">계정 정보를 불러오는 중입니다.</span>
+        </div>
+      </div>
+      <nav class="mypage-nav" aria-label="마이페이지 메뉴">
+        <button type="button" data-my-tab="summary" class="active"><b>학습 요약</b><span>현재 상태와 다음 학습 판단</span></button>
+        <button type="button" data-my-tab="records"><b>학습 기록</b><span>채점 결과와 저장 내역</span></button>
+        <button type="button" data-my-tab="feedback"><b>피드백 현황</b><span>요청 내역과 답변 확인</span></button>
+        <button type="button" data-my-tab="wrongnote"><b>오답 관리</b><span>오자·탈자·첨자 모아보기</span></button>
+        <button type="button" data-my-tab="plan"><b>계정 관리</b><span>크레딧과 기본 정보</span></button>
+      </nav>
+      <div class="my-profile-list" id="myProfileList"></div>
+    </aside>
+
+    <div class="mypage-workspace">
+      <section id="my-summary" class="my-tab-panel active">
+        <article class="portal-card my-summary-hero-card">
+          <div class="my-summary-hero-main">
+            <p class="portal-label">LEARNING SUMMARY</p>
+            <h2 id="mySummaryMainTitle">학습 상태를 불러오는 중입니다.</h2>
+            <p id="mySummaryMainDesc">최근 기록을 기준으로 오늘 해야 할 학습을 정리합니다.</p>
+          </div>
+          <div class="my-summary-hero-stats" id="mySummaryHeroStats"></div>
+        </article>
+
+        <section class="portal-metric-grid my-compact-metrics" id="myMetricGrid"></section>
+
+        <div class="my-summary-board">
+          <article class="portal-card my-diagnosis-card">
+            <div class="portal-card-head clean-head">
+              <div><p class="portal-label">NEXT STEP</p><h2>다음 학습 판단</h2></div>
+            </div>
+            <div id="myInsightBox" class="portal-stack"></div>
+          </article>
+          <article class="portal-card my-today-card">
+            <div class="portal-card-head clean-head">
+              <div><p class="portal-label">TODAY</p><h2>오늘 학습 체크</h2></div>
+            </div>
+            <div id="myTodaySummary" class="portal-stack"></div>
+          </article>
+          <article class="portal-card my-error-card">
+            <div class="portal-card-head clean-head">
+              <div><p class="portal-label">ERROR POINT</p><h2>오류 집중 관리</h2></div>
+            </div>
+            <div id="myErrorSummary" class="portal-stack"></div>
+          </article>
+        </div>
+
+        <article class="portal-card my-action-card">
+          <div class="portal-card-head clean-head">
+            <div><p class="portal-label">ACTION PLAN</p><h2>오늘의 학습 처방</h2></div>
+            <span class="portal-chip" id="myActionPlanChip">자동 분석</span>
+          </div>
+          <div id="myActionPlan" class="my-action-list"></div>
+        </article>
+      </section>
+
+      <section id="my-records" class="my-tab-panel">
+        <article class="portal-card full-panel-card">
+          <div class="portal-card-head clean-head">
+            <div><p class="portal-label">ALL RECORDS</p><h2>전체 학습 기록</h2></div>
+            <div class="portal-filter-pills" id="recordFilterPills"></div>
+          </div>
+          <div id="myRecordTable" class="portal-table-wrap"></div>
+        </article>
+      </section>
+
+      <section id="my-feedback" class="my-tab-panel">
+        <article class="portal-card full-panel-card">
+          <div class="portal-card-head clean-head">
+            <div><p class="portal-label">FEEDBACK</p><h2>피드백 요청/답변</h2></div>
+            <span class="portal-chip" id="feedbackCountChip">0건</span>
+          </div>
+          <div id="myFeedbackList" class="portal-stack feedback-board"></div>
+        </article>
+      </section>
+
+      <section id="my-wrongnote" class="my-tab-panel">
+        <article class="portal-card full-panel-card">
+          <div class="portal-card-head clean-head">
+            <div><p class="portal-label">WRONG NOTE</p><h2>오답 관리</h2></div>
+            <a href="wrong-note.html">기존 오답노트 열기</a>
+          </div>
+          <div id="myWrongNote" class="portal-stack wrongnote-board"></div>
+        </article>
+      </section>
+
+      <section id="my-plan" class="my-tab-panel">
+        <div class="my-account-grid">
+          <article class="portal-card">
+            <div class="portal-card-head clean-head"><div><p class="portal-label">CREDIT</p><h2>크레딧 상태</h2></div></div>
+            <div id="myPlanBox" class="portal-stack"></div>
+          </article>
+          <article class="portal-card">
+            <div class="portal-card-head clean-head"><div><p class="portal-label">ACCOUNT</p><h2>기본 정보</h2></div></div>
+            <div id="mySettingsBox" class="portal-profile-list"></div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>
+    </main>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-client.js?v=portal-20260505-clean"></script>
+<script src="assets/js/auth.js?v=portal-20260505-clean"></script>
+<script src="assets/js/records.js?v=20260601-fixes2"></script>
+<script src="assets/js/responsive-sidebar.js?v=portal-20260505-clean"></script>
+<script src="assets/js/learning-portal.js?v=20260601-unlock-chances"></script>
+
+  <script src="assets/js/mobile-keyboard-blocker.js?v=20260601-external-keyboard-safe"></script>
+</body>
+</html>

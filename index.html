@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>똑소리 속기 - 학생 대시보드</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="assets/css/index.css?v=unlock-room-separate-20260529-v1">
+  <link rel="stylesheet" href="assets/css/responsive-sidebar.css?v=unlock-room-separate-20260529-v1">
+  <link rel="stylesheet" href="assets/css/learning-portal.css?v=unlock-room-separate-20260529-v1">
+  <link rel="stylesheet" href="assets/css/ai-teacher-dashboard.css?v=20260531-room-clean-v2">
+
+  <link rel="stylesheet" href="assets/css/mobile-responsive.css?v=20260601-mobile-v2">
+</head>
+<body onload="window.SorizavaPortal.initDashboard()">
+  <div id="loading-overlay"><div class="spinner"></div></div>
+  <div id="adminModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 style="margin-top:0;">📢 공지사항 수정</h3>
+            <textarea id="adminNoticeInput" class="modal-ta"></textarea>
+            <div style="text-align:right; gap:10px; display:flex; justify-content:flex-end;">
+                <button class="btn-s" style="background:#eee;" onclick="closeAdmin()">취소</button>
+                <button class="btn-s" style="background:var(--primary); color:white;" onclick="saveNotice()">저장</button>
+            </div>
+        </div>
+    </div>
+  <div id="login-wrapper">
+        <div class="login-art">
+            <div class="circle c1"></div>
+            <div class="circle c2"></div>
+            <img src="keyboard.png" class="login-keyboard-img" alt="Keyboard">
+            <h2 style="color:white; font-size:2.5rem; margin-top:20px; z-index:10; text-shadow:0 10px 20px rgba(0,0,0,0.1); font-weight:900;">Speed<br>Typer.</h2>
+        </div>
+        <div class="login-form-container">
+            <div class="login-title">Hello,<br>Master!</div>
+            <div class="login-sub">예비 속기사를 위한 통합 플랫폼</div>
+            
+            <input type="email" id="nameInput" class="inp-box" placeholder="이메일 (Email)">
+            <input type="password" id="pwInput" class="inp-box" placeholder="비밀번호 (Password)" onkeypress="if(event.keyCode==13) login()">
+            <div style="font-size:0.85rem; color:#777; margin:8px 0 16px; line-height:1.5;">계정이 없으면 <a href="signup.html" style="color:var(--primary); font-weight:800;">회원가입</a> 후 관리자 승인을 기다려 주세요.</div>
+            <button onclick="login()" class="btn-login">접속하기 🚀</button>
+        </div>
+    </div>
+  <div id="app-wrapper" style="display:none;">
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="sidebar-overlay" onclick="toggleSidebar(false)"></div>
+    <nav class="sidebar" aria-label="주 메뉴">
+  <div class="sidebar-top">
+    <div class="logo">⚡ SHORTHAND</div>
+    <button type="button" class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="메뉴 닫기">×</button>
+  </div>
+  <div class="nav-list nav-groups">
+    <details class="nav-section" data-nav-section="my-learning" open>
+      <summary class="nav-section-title"><span>나의 학습</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="index.html" class="nav-item active" data-nav-key="dashboard"><span class="nav-icon">📊</span><span class="nav-text">대시보드</span></a>
+        <a href="ai-teacher.html" class="nav-item ai-nav-highlight" data-nav-key="ai-teacher"><span class="nav-icon">🤖</span><span class="nav-text">AI 선생님 피드백방</span></a>
+        <a href="mypage.html" class="nav-item" data-nav-key="mypage"><span class="nav-icon">👤</span><span class="nav-text">마이페이지</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="study-room">
+      <summary class="nav-section-title"><span>공부방</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="intermediate.html" class="nav-item" data-nav-key="intermediate"><span class="nav-icon">🧩</span><span class="nav-text">중급반 공부방</span></a>
+        <a href="intermediate.html?course=advanced" class="nav-item" data-nav-key="advanced"><span class="nav-icon">🚀</span><span class="nav-text">고급반 공부방</span></a>
+        <a href="intermediate.html?course=grade" class="nav-item" data-nav-key="grade"><span class="nav-icon">🏅</span><span class="nav-text">급수반 공부방</span></a>
+        <a href="editorial.html" class="nav-item" data-nav-key="editorial"><span class="nav-icon">📰</span><span class="nav-text">사설연습</span></a>
+        <a href="random.html" class="nav-item" data-nav-key="random"><span class="nav-icon">🎲</span><span class="nav-text">약어랜덤</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="promotion">
+      <summary class="nav-section-title"><span>승급·시험</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="unlock-room.html" class="nav-item" id="unlockRoomNavItem" data-nav-key="unlock-room"><span class="nav-icon">🎯</span><span class="nav-text" id="unlockRoomNavText">진도 승급실</span></a>
+        <a href="exam.html" class="nav-item" data-nav-key="exam"><span class="nav-icon">🎓</span><span class="nav-text">입문반 졸업시험</span></a>
+      </div>
+    </details>
+    <details class="nav-section" data-nav-section="tools">
+      <summary class="nav-section-title"><span>학습도구</span><span class="nav-section-arrow">⌄</span></summary>
+      <div class="nav-section-list">
+        <a href="toksori2.html" class="nav-item" data-nav-key="toksori2"><span class="nav-icon">📝</span><span class="nav-text">똑소리2</span></a>
+        <a href="wrong-note.html" class="nav-item" data-nav-key="wrong-note"><span class="nav-icon">🧾</span><span class="nav-text">오답노트</span></a>
+        <a href="abbr-dictionary.html" class="nav-item" data-nav-key="abbr-dictionary"><span class="nav-icon">📚</span><span class="nav-text">약어사전</span></a>
+        <a href="measure.html" class="nav-item" data-nav-key="measure"><span class="nav-icon">⏱️</span><span class="nav-text">자수측정</span></a>
+        <a href="sparta.html" class="nav-item" data-nav-key="sparta"><span class="nav-icon">🔥</span><span class="nav-text">스파르타</span></a>
+        <a href="king.html" class="nav-item" data-nav-key="king"><span class="nav-icon">👑</span><span class="nav-text">타자왕</span></a>
+      </div>
+    </details>
+  </div>
+  <div class="sidebar-footer">
+    <div class="profile-card" onclick="window.SorizavaAuth && window.SorizavaAuth.signOut ? window.SorizavaAuth.signOut() : (window.logout && window.logout())">
+      <div class="avatar" id="userAvatar">U</div>
+      <div class="profile-meta">
+        <div class="profile-name" id="userNameSide">User</div>
+        <div class="profile-action">로그아웃</div>
+      </div>
+    </div>
+    <button id="adminBtn" class="admin-trigger" onclick="location.href='admin.html'" style="display:none;">⚙️ 관리자 페이지</button>
+  </div>
+</nav>
+    <main class="main-content portal-main">
+<section class="portal-page dashboard-page dashboard-redesign dashboard-executive" data-portal-page="dashboard">
+  <div id="notice-area" class="portal-notice slim-notice" style="display:none;">
+    <strong>공지</strong><span id="noticeText">공지사항 내용</span><button type="button" onclick="window.SorizavaPortal.closeNotice()">×</button>
+  </div>
+
+  <header class="dashboard-home-strip" aria-label="학습 홈 요약">
+    <div class="dashboard-home-main">
+      <p class="portal-kicker">TODAY HOME</p>
+      <h1><span id="dashboardUserName">사용자</span>님, 오늘 학습 상태만 확인하세요.</h1>
+      <p id="dashboardSubtitle">현재 진도, 오늘 목표, 요일별 꾸준함, 확인할 피드백만 간결하게 보여줍니다.</p>
+    </div>
+    <div class="dashboard-home-pills" aria-label="오늘 핵심 요약">
+      <div><span>오늘 목표</span><b id="dashboardHomeGoalChip">0/5</b></div>
+      <div><span>꾸준함</span><b id="dashboardHomeConsistencyChip">0/7일</b></div>
+      <div><span>주간 승급</span><b id="dashboardHomeUnlockChip">3회</b></div>
+      <div><span>확인 피드백</span><b id="dashboardHomeFeedbackChip">0건</b></div>
+    </div>
+  </header>
+
+  <section class="dashboard-ai-teacher-entry" aria-label="AI 선생님 피드백방 바로가기">
+    <div class="ai-entry-copy">
+      <span class="ai-entry-icon">🤖</span>
+      <div>
+        <p class="portal-kicker">AI TEACHER</p>
+        <h2>오늘 연습, AI 선생님이 어디서 막혔는지 짚어드립니다.</h2>
+        <p>입력 지연·반복 오자·약어 사용까지 분석하는 프리미엄 피드백방입니다.</p>
+      </div>
+    </div>
+    <a class="portal-btn secondary ai-entry-link" href="ai-teacher.html">피드백방 들어가기</a>
+  </section>
+
+  <section class="dashboard-stat-grid" aria-label="핵심 학습 지표">
+    <article class="dashboard-progress-card dashboard-course-card" id="dashboardCourseCard">
+      <span class="dash-card-eyebrow">현재 진도</span>
+      <div class="dashboard-course-main">
+        <span class="dashboard-course-icon" id="dashboardCourseIcon">🧩</span>
+        <div>
+          <b id="dashboardCurrentProgress">진도 확인 중</b>
+          <small id="dashboardCurrentProgressMeta">기록을 불러오고 있습니다.</small>
+        </div>
+      </div>
+      <a class="dashboard-course-link" id="dashboardCourseLink" href="intermediate.html">내 진도 공부방 열기</a>
+    </article>
+
+    <article class="dashboard-stat-card">
+      <span>이번 주 연습 시간</span>
+      <b id="dashboardWeekTime">0분</b>
+      <small id="dashboardWeekTimeMeta">최근 7일 기준</small>
+    </article>
+
+    <article class="dashboard-stat-card">
+      <span>총 누적 공부시간</span>
+      <b id="dashboardTotalTime">0분</b>
+      <small id="dashboardTotalTimeMeta">저장된 기록 기준</small>
+    </article>
+
+    <article class="dashboard-stat-card">
+      <span>꾸준함</span>
+      <b id="dashboardConsistencyRate">0/7일</b>
+      <small id="dashboardConsistencyMeta">최근 7일 학습일</small>
+    </article>
+  </section>
+
+  <section class="dash-content-grid dashboard-main-grid dashboard-focus-grid">
+    <article class="portal-card dash-chart-card dashboard-weekday-card">
+      <div class="portal-card-head clean-head">
+        <div><p class="portal-label">WEEKLY ROUTINE</p><h2>요일별 연습 균형</h2></div>
+        <a href="mypage.html#records">기록 보기</a>
+      </div>
+      <div class="dashboard-chart-note" id="dashboardWeekdayNote">월~일 기준으로 연습 흐름을 표시합니다.</div>
+      <div class="portal-chart dashboard-weekday-chart" id="dashboardWeekdayChart"></div>
+    </article>
+
+    <article class="portal-card dashboard-goal-card">
+      <div class="portal-card-head clean-head">
+        <div><p class="portal-label">TODAY GOAL</p><h2>오늘 공부 목표</h2></div>
+        <button type="button" class="dashboard-text-btn" id="dashboardGoalResetBtn">초기화</button>
+      </div>
+      <div class="dashboard-goal-summary" id="dashboardGoalSummary">오늘 목표 달성 현황을 불러오는 중입니다.</div>
+      <div class="dashboard-goal-list" id="dashboardGoalList"></div>
+    </article>
+  </section>
+
+  <section class="dashboard-bottom-grid dashboard-summary-grid">
+    <article class="portal-card dashboard-feedback-summary-card">
+      <div class="portal-card-head clean-head">
+        <div><p class="portal-label">FEEDBACK</p><h2>피드백 요약</h2></div>
+        <a href="mypage.html#feedback">최근 피드백 보기</a>
+      </div>
+      <div class="dashboard-feedback-summary" id="dashboardFeedbackSummary">
+        <div><span>전체 피드백</span><b id="dashboardFeedbackTotal">0건</b></div>
+        <div><span>확인 필요</span><b id="dashboardFeedbackNeedCheck">0건</b></div>
+        <div><span>진행 중</span><b id="dashboardFeedbackPending">0건</b></div>
+      </div>
+      <p class="dashboard-feedback-latest" id="dashboardFeedbackLatest">최근 피드백이 없습니다.</p>
+    </article>
+
+    <article class="portal-card dashboard-routine-card dashboard-unlock-route-card">
+      <div class="portal-card-head clean-head">
+        <div><p class="portal-label">PROMOTION ROOM</p><h2>진도 승급실 응시 현황</h2></div>
+      </div>
+      <div class="dashboard-unlock-summary" id="dashboardUnlockSummary">이번 주 진도 승급실 응시 횟수를 불러오는 중입니다.</div>
+      <ol class="dashboard-routine-list" id="dashboardRoutineList">
+        <li><span>🎯</span><b>진도 승급실 입장</b><small>남은 응시 횟수를 확인하는 중입니다.</small></li>
+      </ol>
+      <p class="dashboard-routine-note" id="dashboardRoutineNote">이번 주 남은 승급 응시 횟수와 다음 승급 대상을 확인하세요.</p>
+    </article>
+  </section>
+</section>
+    </main>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/js/supabase-client.js?v=unlock-room-separate-20260529-v1"></script>
+<script src="assets/js/auth.js?v=unlock-room-separate-20260529-v1"></script>
+<script src="assets/js/records.js?v=20260531-ai-premium"></script>
+<script src="assets/js/responsive-sidebar.js?v=unlock-room-separate-20260529-v1"></script>
+<script src="assets/js/learning-portal.js?v=20260601-unlock-chances"></script>
+
+  <script src="assets/js/mobile-keyboard-blocker.js?v=20260601-external-keyboard-safe"></script>
+</body>
+</html>
